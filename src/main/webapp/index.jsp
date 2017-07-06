@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ShiyanlouPhoto</title>
+    <title>密码管理器</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="http://labfile.oss.aliyuncs.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
-                <h2>ShiyanlouPhoto</h2>
+                <h2>密码管理器</h2>
             </div>
         </div>
         <div class="row">
@@ -95,7 +95,7 @@
             //点击登录
             $('#login').click(function() {
                 //提交登录表单
-                $.post('UserAction?type=1',
+                $.post('${pageContext.request.contextPath}' + '/userAction?type=1',
                 {
                     username: $('#username').val(),
                     password: $('#password').val()
@@ -118,7 +118,7 @@
             //点击注册按钮
             $('#register').click(function() {
                 //提交注册表单
-                $.post('UserAction?type=2',
+                $.post('${pageContext.request.contextPath}' + '/userAction?type=2',
                 {
                     username: $('#reg_username').val(),
                     password: $('#reg_password').val(),
