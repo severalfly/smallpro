@@ -3,18 +3,18 @@ package com.leon.passwd.bean;
 public class Account
 {
 	// 用户唯一id
-	private long userid;
+	private int userid;
 	// 用户姓名
 	private String username;
 	// 用户密码，用于登录
 	private String passwd;
 
-	public long getUserid()
+	public int getUserid()
 	{
 		return userid;
 	}
 
-	public void setUserid(long userid)
+	public void setUserid(int userid)
 	{
 		this.userid = userid;
 	}

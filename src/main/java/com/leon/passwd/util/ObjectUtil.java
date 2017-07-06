@@ -6,4 +6,14 @@ public class ObjectUtil
 	{
 		return obj.toString();
 	}
+
+	public static long getLong(Object obj)
+	{
+		return Long.parseLong(obj.toString());
+	}
+
+	public static int getInt(Object obj)
+	{
+		return Integer.parseInt(obj.toString());
+	}
 }

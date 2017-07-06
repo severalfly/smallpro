@@ -4,6 +4,7 @@ select * from user
 
 create table passwd_record(
    id bigint,
+   owner_id int, // 密码所有者姓名
    uname varchar(50),  // 用户名
    login_name varchar(50), // 登录名
    e_mail varchar(50), // 邮箱
@@ -13,7 +14,7 @@ create table passwd_record(
    primary key(id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8
 
-show create table image
+show create table user
 
 
 
