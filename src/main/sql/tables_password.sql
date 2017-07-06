@@ -1,6 +1,14 @@
+
+
 select * from image
 
 select * from user
+create table user(
+        id int auto_increment,
+        username varchar(50),
+        password varchar(100),
+   primary key(id)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8
 
 create table passwd_record(
    id bigint,

@@ -49,44 +49,7 @@
         </form>
     </div>
 
-    <!-- 注册对话框 begin -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">UserRegister</h4>
-          </div>
-          <div class="modal-body">
-              <form class="form-horizontal" role="form">
-              <div class="form-group"  >
-                <label for="reg_username" class="col-xs-2 control-label" >Username</label>
-                <div class="col-xs-4">
-                  <input type="text" class="form-control" id="reg_username"/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="reg_password" class="col-xs-2 control-label">Password</label>
-                <div class="col-xs-4">
-                  <input type="password" class="form-control" id="reg_password"/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="reg_repassword" class="col-xs-2 control-label">Reinput</label>
-                <div class="col-xs-4">
-                  <input type="password" class="form-control" id="reg_repassword"/>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="register">Register</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 注册对话框 end -->
+   
 
     <script src="http://labfile.oss.aliyuncs.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
