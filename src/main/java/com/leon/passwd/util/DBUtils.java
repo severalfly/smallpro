@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBUtils
 {
@@ -83,9 +84,9 @@ public class DBUtils
 	 * @param parameters 参数
 	 * @return
 	 */
-	public static ArrayList<Object[]> query(String sql, String[] parameters)
+	public static List<Object[]> query(String sql, String[] parameters)
 	{
-		ArrayList<Object[]> list = new ArrayList<Object[]>();
+		List<Object[]> list = new ArrayList<Object[]>();
 		try
 		{
 			connection = getConnection();

@@ -95,30 +95,27 @@
             //点击登录
             $('#login').click(function() {
                 //提交登录表单
-                $.post('${pageContext.request.contextPath}' + '/userAction?type=1',
+                $.post('${pageContext.request.contextPath}' + '/sys/login.do?type=1',
                 {
                     username: $('#username').val(),
                     password: $('#password').val()
                 },
                 function(data, status) {
-                    if (data == '1') {
-                        createPopOver('#username', 'right', 'Username can not be empty ', 'show');
-                    } else if (data == '2') {
-                        createPopOver('#password', 'right', ' password can not be empty', 'show');
-                    } else if (data == '3') {
-                        createPopOver('#username', 'right', ' Username does not exist', 'show');
-                    } else if (data == '4') {
-                        createPopOver('#password', 'right', ' wrong password', 'show');
-                    } else if (data == 5) {
+                	if (data.code == 0) {
                         location.href = 'home.jsp';
                     }
+                	else {
+                		createPopOver('#username', 'right', 'wrong username or password', 'show');
+                	}
+                		
+                		
                 });
             });
 
             //点击注册按钮
             $('#register').click(function() {
                 //提交注册表单
-                $.post('${pageContext.request.contextPath}' + '/userAction?type=2',
+                $.post('${pageContext.request.contextPath}' + '/sys/login.do?type=2',
                 {
                     username: $('#reg_username').val(),
                     password: $('#reg_password').val(),
