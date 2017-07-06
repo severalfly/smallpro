@@ -32,7 +32,7 @@
 				<tr>
 					<td>${passwd.id }</td>
 					<td>${passwd.uname }</td>
-					<td>${passwd.passwd }</td>
+					<td class="table-success">${passwd.passwd }</td>
 				</tr>
 			</c:forEach>
 		</tbody>
