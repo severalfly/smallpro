@@ -25,6 +25,7 @@ public class AccountAction extends AbstractAction
 
 	private String username;
 	private String password;
+	private String ids;
 
 	@Action(value = "testv2")
 	public void testv2()
@@ -65,6 +66,12 @@ public class AccountAction extends AbstractAction
 		outputString(res.toJSONString());
 	}
 
+	@Action(value = "/deletePasswd")
+	public void deletePasswd()
+	{
+		System.out.println("deletePasswd " + this.ids);
+	}
+
 	public String getUsername()
 	{
 		return username;
@@ -83,6 +90,16 @@ public class AccountAction extends AbstractAction
 	public void setPassword(String password)
 	{
 		this.password = password;
+	}
+
+	public String getIds()
+	{
+		return this.ids;
+	}
+
+	public void setIds(String ids)
+	{
+		this.ids = ids;
 	}
 
 }
