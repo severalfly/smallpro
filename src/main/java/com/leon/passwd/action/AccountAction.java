@@ -48,6 +48,7 @@ public class AccountAction extends AbstractAction
 			{
 				// 正确了
 				res.put("code", "0");
+
 			}
 		}
 		catch (Exception e)
