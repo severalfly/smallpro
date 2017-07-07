@@ -26,6 +26,9 @@ public class AccountAction extends AbstractAction
 	private String username;
 	private String password;
 	private String ids;
+	private String unmae;
+	private String loginName;
+	private String passwordRecord;
 
 	@Action(value = "testv2")
 	public void testv2()
@@ -72,6 +75,12 @@ public class AccountAction extends AbstractAction
 		System.out.println("deletePasswd " + this.ids);
 	}
 
+	@Action(value = "/addPasswd")
+	public void addPasswd()
+	{
+		System.out.println("addPasswd " + this.loginName);
+	}
+
 	public String getUsername()
 	{
 		return username;
@@ -100,6 +109,36 @@ public class AccountAction extends AbstractAction
 	public void setIds(String ids)
 	{
 		this.ids = ids;
+	}
+
+	public String getUnmae()
+	{
+		return this.unmae;
+	}
+
+	public void setUnmae(String unmae)
+	{
+		this.unmae = unmae;
+	}
+
+	public String getLoginName()
+	{
+		return this.loginName;
+	}
+
+	public void setLoginName(String loginName)
+	{
+		this.loginName = loginName;
+	}
+
+	public String getPasswordRecord()
+	{
+		return this.passwordRecord;
+	}
+
+	public void setPasswordRecord(String passwordRecord)
+	{
+		this.passwordRecord = passwordRecord;
 	}
 
 }

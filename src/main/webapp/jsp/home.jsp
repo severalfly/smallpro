@@ -54,15 +54,15 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabe2">添加帐号密码</h4>
+					<h4 class="modal-title" id="myModalLabe3">添加帐号密码</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" role="form" id="form">
 						<div class="form-group">
-							<label for="image_name" class="col-xs-2 control-label">uname</label>
+							<label for="uname" class="col-xs-2 control-label">uname</label>
 							<div class="col-xs-4">
-								<input type="text" class="form-control" id="image_name"
-									name="image_name" />
+								<input type="text" class="form-control" id="uname"
+									name="uname" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -119,7 +119,6 @@
 							$('#delete').click(function() {
 												var ids = "";
 												var urls = "";
-												alert($('#passrecord').val());
 												$('input[type=checkbox]:checked')
 														.each(function() {
 																	ids += $(this)
@@ -148,7 +147,16 @@
 																});
 											});
 							$('#addpasswd').click(function () {
-								alert('hehe');
+								//alert('eheh' +$("#login_name").val());
+								 $.post('${pageContext.request.contextPath}' + '/sys/addPasswd.action?type=1', {
+					                    uname: $("#uname").val(),
+					                    loginName: $('#login_name').val(),
+					                    passwdRecord: $('#passwdrecord').val()
+					                },function(data, status) {
+					                    $('#myModa3').modal('hide');
+					                    location.href = '${pageContext.request.contextPath}'
+											+ '/jsp/home.jsp';
+					                });
 							});
 							//显示弹出框
 							function createPopOver(id, placement, content,
