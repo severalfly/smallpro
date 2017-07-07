@@ -1,5 +1,6 @@
 package com.leon.passwd.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -29,15 +30,23 @@ public class AccountImpl
 
 	public List<PasswdRecord> queryAllPasswds(int userid)
 	{
-		String sql = "select id,own_user, uname,login_name,e_mail,passwd,create_time,update_time, from passwd_record where  owner_id = ?";
+		String sql = "select id, uname,login_name,e_mail,passwd,create_time,update_time from passwd_record where  owner_id = ?";
 		List<Object[]> s = DBUtils.query(sql, new String[] { userid + "" });
 		if (s == null || s.size() <= 0)
 		{
-			return null;
+			return new ArrayList<>();
 		}
-		Account res = new Account();
-		res.setUsername(ObjectUtil.getString(s.get(0)[0]));
-		res.setPasswd(ObjectUtil.getString(s.get(0)[1]));
-		return null;
+		List<PasswdRecord> list = new ArrayList<>(s.size());
+		for (Object[] objects : s)
+		{
+			PasswdRecord p = new PasswdRecord();
+			p.setId(ObjectUtil.getInt(objects[0]));
+			p.setUname(ObjectUtil.getString(objects[1]));
+			p.setLogin_name(ObjectUtil.getString(objects[2]));
+			p.setE_mail(ObjectUtil.getString(objects[3]));
+			p.setPasswd(ObjectUtil.getString(objects[4]));
+			list.add(p);
+		}
+		return list;
 	}
 }
