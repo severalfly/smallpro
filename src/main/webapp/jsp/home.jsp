@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -25,7 +25,7 @@
 			</div>
 			<div id="navbar-menu" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="#" id="indexPage">Home</a></li>
 					<li><a href="#">Page One</a></li>
 					<li><a href="#">Page Two</a></li>
 				</ul>
@@ -33,7 +33,6 @@
 		</nav>
 		<div class="row-fluid">
 			<div class="col-md-9">
-				<div class="btn btn-default">首页</div>
 				<div class="btn btn-success">您的帐号：${user }</div>
 				<div class="btn btn-danger">退出</div>
 			</div>
@@ -47,20 +46,20 @@
 
 		<div id="content" class="row-fluid">
 			<div class="col-md-9">
-				<table class="table table-striped table-hover table-bordered">
+				<table class="table table-striped table-hover table-bordered" id="tablefirst">
 					<caption>您的密码</caption>
 					<thead>
 						<tr>
-							<th>id</th>
-							<th>uname</th>
-							<th>password</th>
-							<th>operator</th>
+							<th id="id">id</th>
+							<th id="uname">uname</th>
+							<th id="password">password</th>
+							<th id="operator">operator</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="passwd">
 							<tr>
-								<td><input type="checkbox" value="${passwd.id }" id="passrecord"></input>${passwd.id }</td>
+								<td>${passwd.id }</td>
 								<td>${passwd.uname }</td>
 								<td class="text-success">${passwd.passwd }</td>
 								<td></td>
@@ -137,6 +136,22 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$("#tablefirst td").click(function () {
+		        var tdSeq = $(this).parent().find("td").index($(this));
+		        var trSeq = $(this).parent().parent().find("tr").index($(this).parent());
+		        //alert("第" + (trSeq) + "行，第" + (tdSeq+1) + "列");
+		        var ids='';
+		       // $(this).parent().parent().find("tr").each(function () {
+				//	ids += $(this).html() + ',,,,,,,,,,,,,,,,,';
+				//})
+				$(this).parent().find("td").each(function () {
+					ids += $(this).html() + "----------"+$(this)+",,,,,,,,,,,,,";
+				});
+		        alert(ids);
+		    })
+			$('#indexPage').click(function () {
+				location.href= '${pageContext.request.contextPath}/index.jsp'
+			});
 			// 点击确定删除图片
 			$('#delete').click(function() {
 				var ids = "";
@@ -174,6 +189,19 @@
 			}
 
 		});
+		function determine() {
+			var data = new Array();
+			$("tr").each(function() {
+				var s = $(this);
+				if (s.find('input[type="checkbox"]').is(":checked")) {
+					data.push({
+						A : s.find(".a").text(),
+						B : s.find(".b").text()
+					});
+				}
+			});
+			return data;
+		}
 	</script>
 </body>
 </html>
