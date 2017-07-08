@@ -14,91 +14,124 @@
     <![endif]-->
 </head>
 <body>
-	<div>
-		<p class="text-success">您的帐号：${user }</p>
-	</div>
-	<div>
-		<div class="btn btn-info" data-toggle="modal" data-target="#myModa3">Add</div>
-		<div class="btn btn-danger">
-			<a href="#" data-toggle="modal" data-target="#myModa4">Delete</a>
-		</div>
-	</div>
-	<table class="table table-striped table-hover table-bordered">
-		<caption>您的密码</caption>
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>uname</th>
-				<th>password</th>
-				<th>operator</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${list }" var="passwd">
-				<tr>
-					<td><input type="checkbox" value="${passwd.id }" id="passrecord"></input>${passwd.id }</td>
-					<td>${passwd.uname }</td>
-					<td class="text-success">${passwd.passwd }</td>
-					<td></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-
-	<!-- 新增对话框 start -->
-	<div class="modal fade" id="myModa3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabe3">添加帐号密码</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" role="form" id="form">
-						<div class="form-group">
-							<label for="uname" class="col-xs-2 control-label">uname</label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" id="uname" name="uname" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="login_name" class="col-xs-2 control-label">loginName</label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" id="login_name" name="login_name" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="passwdrecord" class="col-xs-2 control-label">uname</label>
-							<div class="col-xs-4">
-								<input type="password" class="form-control" id="passwdrecord" name="passwdrecord" />
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary" id="addpasswd">add</button>
+	<div class="container">
+		<nav class="navbar navbar-inverse">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Brand</a>
+			</div>
+			<div id="navbar-menu" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Page One</a></li>
+					<li><a href="#">Page Two</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="row-fluid">
+			<div class="col-md-9">
+				<div class="btn btn-default">首页</div>
+				<div class="btn btn-success">您的帐号：${user }</div>
+				<div class="btn btn-danger">退出</div>
+			</div>
+			<div class="col-md-3">
+				<div class="btn btn-info" data-toggle="modal" data-target="#myModa3">Add</div>
+				<div class="btn btn-danger">
+					<a href="#" data-toggle="modal" data-target="#myModa4">Delete</a>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 新增对话框 end -->
+
+		<div id="content" class="row-fluid">
+			<div class="col-md-9">
+				<table class="table table-striped table-hover table-bordered">
+					<caption>您的密码</caption>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>uname</th>
+							<th>password</th>
+							<th>operator</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list }" var="passwd">
+							<tr>
+								<td><input type="checkbox" value="${passwd.id }" id="passrecord"></input>${passwd.id }</td>
+								<td>${passwd.uname }</td>
+								<td class="text-success">${passwd.passwd }</td>
+								<td></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-3">
+				<h2>Sidebar</h2>
+			</div>
+		</div>
 
 
-	<!-- 删除对话框 start -->
-	<div class="modal fade" id="myModa4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabe4">confirm to delete?</h4>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger" id="delete">Confirm</button>
+
+
+		<!-- 新增对话框 start -->
+		<div class="modal fade" id="myModa3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabe3">添加帐号密码</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" role="form" id="form">
+							<div class="form-group">
+								<label for="uname" class="col-xs-2 control-label">uname</label>
+								<div class="col-xs-4">
+									<input type="text" class="form-control" id="uname" name="uname" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="login_name" class="col-xs-2 control-label">loginName</label>
+								<div class="col-xs-4">
+									<input type="text" class="form-control" id="login_name" name="login_name" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="passwdrecord" class="col-xs-2 control-label">uname</label>
+								<div class="col-xs-4">
+									<input type="password" class="form-control" id="passwdrecord" name="passwdrecord" />
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="addpasswd">add</button>
+					</div>
 				</div>
 			</div>
 		</div>
+		<!-- 新增对话框 end -->
+
+
+		<!-- 删除对话框 start -->
+		<div class="modal fade" id="myModa4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabe4">confirm to delete?</h4>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-danger" id="delete">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 删除对话框 end -->
 	</div>
-	<!-- 删除对话框 end -->
 
 	<script src="http://labfile.oss.aliyuncs.com/jquery/1.11.1/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
