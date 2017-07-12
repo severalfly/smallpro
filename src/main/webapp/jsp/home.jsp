@@ -137,32 +137,15 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#tablefirst td").click(function() {
-				//var VAL=document.getElementById("tablefirst").rows[1].cells[2];
-				//alert(VAL.innerHTML);
 				var tdSeq = $(this).parent().find("td").index($(this));
 				var trSeq = $(this).parent().parent().find("tr").index($(this).parent());
 				//alert("第" + (trSeq) + "行，第" + (tdSeq+1) + "列");
-				var ids = '';
-				// $(this).parent().parent().find("tr").each(function () {
-				//	ids += $(this).html() + ',,,,,,,,,,,,,,,,,';
-				//})
-				var i = 0;
-				//alert(trSeq + " "  + tdSeq);
-				//alert(document.getElementById("tablefirst").rows[trSeq+1].cells[tdSeq].innerHTML);
 				$.post('${pageContext.request.contextPath}' + '/deletePasswd.action?type=2', {
 					ids : document.getElementById("tablefirst").rows[trSeq+1].cells[0 ].innerHTML,
 				}, function(data, status) {
 					$('#myModa4').modal('hide');
 					location.href = '${pageContext.request.contextPath}' + '/jsp/home.jsp';
 				});
-				/*$(this).parent().find("td").each(function() {
-					if (i == 3) {
-
-					}
-					i = i + 1;
-					ids += $(this).html() + "----------" + $(this).text() + ",,,,,,,,,,,,,";
-				});*/
-				//alert(ids);
 			})
 			$('#indexPage').click(function() {
 				location.href = '${pageContext.request.contextPath}/index.jsp'
