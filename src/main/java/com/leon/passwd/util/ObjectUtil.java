@@ -4,6 +4,10 @@ public class ObjectUtil
 {
 	public static String getString(Object obj)
 	{
+		if (obj == null)
+		{
+			return null;
+		}
 		return obj.toString();
 	}
 

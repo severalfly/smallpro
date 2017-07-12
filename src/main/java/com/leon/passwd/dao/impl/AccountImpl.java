@@ -28,6 +28,12 @@ public class AccountImpl
 		return res;
 	}
 
+	public int insertPasswordRecord(PasswdRecord pr)
+	{
+		String sql = "insert into passwd_record(id,owner_id, uname, login_name, e_mail, passwd, create_time) value(?, ?, ? ,?, ?, ?, current_timestamp)";
+		DBUtils.updates(new String[] { sql }, new String[][] { new String[] { pr.getId() + "", pr.getOwnId() + "", pr.getUname(), pr.getLogin_name(), pr.getE_mail(), pr.getPasswd() } });
+		return 1;
+	}
 	public List<PasswdRecord> queryAllPasswds(int userid)
 	{
 		String sql = "select id, uname,login_name,e_mail,passwd,create_time,update_time from passwd_record where  owner_id = ?";
@@ -40,7 +46,7 @@ public class AccountImpl
 		for (Object[] objects : s)
 		{
 			PasswdRecord p = new PasswdRecord();
-			p.setId(ObjectUtil.getInt(objects[0]));
+			p.setId(ObjectUtil.getLong(objects[0]));
 			p.setUname(ObjectUtil.getString(objects[1]));
 			p.setLogin_name(ObjectUtil.getString(objects[2]));
 			p.setE_mail(ObjectUtil.getString(objects[3]));
@@ -48,5 +54,11 @@ public class AccountImpl
 			list.add(p);
 		}
 		return list;
+	}
+
+	public void deletePr(String ids)
+	{
+		String sql = "delete from passwd_record where id = ?";
+		DBUtils.updates(new String[] { sql }, new String[][] { new String[] { ids + "" } });
 	}
 }

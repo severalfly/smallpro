@@ -140,12 +140,14 @@
 				var tdSeq = $(this).parent().find("td").index($(this));
 				var trSeq = $(this).parent().parent().find("tr").index($(this).parent());
 				//alert("第" + (trSeq) + "行，第" + (tdSeq+1) + "列");
-				$.post('${pageContext.request.contextPath}' + '/deletePasswd.action?type=2', {
-					ids : document.getElementById("tablefirst").rows[trSeq+1].cells[0 ].innerHTML,
-				}, function(data, status) {
-					$('#myModa4').modal('hide');
-					location.href = '${pageContext.request.contextPath}' + '/jsp/home.jsp';
-				});
+				if (tdSeq == 3 && window.confirm('确定删除？')) {
+					$.post('${pageContext.request.contextPath}' + '/deletePasswd.action?type=2', {
+						ids : document.getElementById("tablefirst").rows[trSeq + 1].cells[0].innerHTML,
+					}, function(data, status) {
+						$('#myModa4').modal('hide');
+						location.href = '${pageContext.request.contextPath}' + '/jsp/home.jsp';
+					});
+				}
 			})
 			$('#indexPage').click(function() {
 				location.href = '${pageContext.request.contextPath}/index.jsp'
@@ -171,7 +173,7 @@
 				$.post('${pageContext.request.contextPath}' + '/sys/addPasswd.action?type=1', {
 					uname : $("#uname").val(),
 					loginName : $('#login_name').val(),
-					passwdRecord : $('#passwdrecord').val()
+					passwordRecord : $('#passwdrecord').val()
 				}, function(data, status) {
 					$('#myModa3').modal('hide');
 					location.href = '${pageContext.request.contextPath}' + '/jsp/home.jsp';

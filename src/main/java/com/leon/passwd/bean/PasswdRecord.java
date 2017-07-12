@@ -3,6 +3,7 @@ package com.leon.passwd.bean;
 public class PasswdRecord
 {
 	private long id;
+	private long ownId; // 拥有此密码的用户id
 	private String uname;// 用户名
 	private String login_name;// 登录名
 	private String e_mail;// 邮箱
@@ -16,6 +17,16 @@ public class PasswdRecord
 	public void setId(long id)
 	{
 		this.id = id;
+	}
+
+	public long getOwnId()
+	{
+		return this.ownId;
+	}
+
+	public void setOwnId(long ownId)
+	{
+		this.ownId = ownId;
 	}
 
 	public String getUname()

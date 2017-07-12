@@ -59,6 +59,8 @@ public class AccountAction extends AbstractAction
 				HttpServletRequest request = ServletActionContext.getRequest();
 				request.getSession().setAttribute("list", list);
 				request.getSession().setAttribute("user", account.getUsername());
+				request.getSession().setAttribute("userid", account.getUserid());
+
 			}
 		}
 		catch (Exception e)
@@ -69,18 +71,35 @@ public class AccountAction extends AbstractAction
 		outputString(res.toJSONString());
 	}
 
-	@Action(value = "/deletePasswd")
-	public void deletePasswd()
-	{
-		System.out.println("deletePasswd " + this.ids);
-	}
 
 	@Action(value = "/addPasswd")
 	public void addPasswd()
 	{
-		System.out.println("addPasswd " + this.loginName);
+
+		System.out.println("addPasswd " + this.loginName + " " + this.unmae + " " + this.passwordRecord);
+		try
+		{
+			PasswdRecord pr = new PasswdRecord();
+			pr.setId(System.currentTimeMillis());
+			int ownid = (int) ServletActionContext.getRequest().getSession().getAttribute("userid");
+			pr.setOwnId(ownid);
+			pr.setPasswd(this.passwordRecord);
+			pr.setUname(this.unmae);
+			pr.setLogin_name(this.loginName);
+			this.accountImpl.insertPasswordRecord(pr);
+		}
+		catch (Exception e)
+		{
+			logger.error("", e);
+		}
 	}
 
+	@Action(value = "/deletePasswd")
+	public void deletePasswd()
+	{
+		System.out.println("deletePasswd " + this.ids);
+		this.accountImpl.deletePr(this.ids);
+	}
 	public String getUsername()
 	{
 		return username;
