@@ -87,6 +87,9 @@ public class AccountAction extends AbstractAction
 			pr.setUname(this.unmae);
 			pr.setLogin_name(this.loginName);
 			this.accountImpl.insertPasswordRecord(pr);
+			List<PasswdRecord> list = this.accountImpl.queryAllPasswds(ownid);
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.getSession().setAttribute("list", list);
 		}
 		catch (Exception e)
 		{
@@ -99,6 +102,10 @@ public class AccountAction extends AbstractAction
 	{
 		System.out.println("deletePasswd " + this.ids);
 		this.accountImpl.deletePr(this.ids);
+		int ownid = (int) ServletActionContext.getRequest().getSession().getAttribute("userid");
+		List<PasswdRecord> list = this.accountImpl.queryAllPasswds(ownid);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.getSession().setAttribute("list", list);
 	}
 	public String getUsername()
 	{
