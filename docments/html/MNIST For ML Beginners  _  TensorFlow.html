@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://www.tensorflow.org/get_started/mnist/beginners -->
+<html lang="en" class="chekov"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./MNIST For ML Beginners  _  TensorFlow_files/linkid.js.下载"></script><script async="" src="./MNIST For ML Beginners  _  TensorFlow_files/analytics.js.下载"></script><script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script><meta name="xsrf_token" content="W4t2nOqgUNE3wc5HzVveyvaDPCFDa6OsP10oWBdTJAA6MTUwMDc5OTM0OTI5MDgxMA"><link rel="canonical" href="https://www.tensorflow.org/get_started/mnist/beginners"><link rel="alternate" href="https://www.tensorflow.org/get_started/mnist/beginners" hreflang="en"><link rel="alternate" href="https://tensorflow.google.cn/get_started/mnist/beginners" hreflang="en-cn"><link rel="alternate" href="https://www.tensorflow.org/get_started/mnist/beginners" hreflang="x-default"><link rel="shortcut icon" href="https://www.tensorflow.org/_static/c2b0e4ea66/images/tensorflow/favicon.png"><link rel="apple-touch-icon" href="https://www.tensorflow.org/images/apple-touch-icon-180x180.png"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./MNIST For ML Beginners  _  TensorFlow_files/css"><link rel="stylesheet" href="./MNIST For ML Beginners  _  TensorFlow_files/devsite-tensorflow-orange.css"><link rel="search" type="application/opensearchdescription+xml" href="https://www.tensorflow.org/s/opensearch.xml" data-tooltip-align="b,c" data-tooltip="TensorFlow" aria-label="TensorFlow" data-title="TensorFlow"><script src="./MNIST For ML Beginners  _  TensorFlow_files/jquery-bundle.js.下载"></script><meta property="og:site_name" content="TensorFlow"><meta property="og:type" content="website"><meta property="og:url" content="https://www.tensorflow.org/get_started/mnist/beginners"><meta property="og:locale" content="en"><script>
+    var ___gcfg = ___gcfg || {};
+    ___gcfg.lang = 'zh-cn';
+  </script><title>MNIST For ML Beginners &nbsp;|&nbsp; TensorFlow</title><meta property="og:title" content="MNIST For ML Beginners  |  TensorFlow"><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+#MathJax_SVG_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_Processing {visibility: hidden; position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; display: block!important}
+.MathJax_SVG_Processed {display: none!important}
+.MathJax_SVG_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head><body class="
+               devsite-doc-page
+               
+               
+               
+               
+               devsite-uhura no-touch devsite-dark-code" id="top_of_page"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_SVG_Hidden"></div><svg><defs id="MathJax_SVG_glyphs"><path stroke-width="1" id="MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="1" id="MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path><path stroke-width="1" id="MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path><path stroke-width="1" id="MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path><path stroke-width="1" id="MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path stroke-width="1" id="MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path><path stroke-width="1" id="MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path><path stroke-width="1" id="MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path><path stroke-width="1" id="MJMAIN-65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z"></path><path stroke-width="1" id="MJMAIN-76" d="M338 431Q344 429 422 429Q479 429 503 431H508V385H497Q439 381 423 345Q421 341 356 172T288 -2Q283 -11 263 -11Q244 -11 239 -2Q99 359 98 364Q93 378 82 381T43 385H19V431H25L33 430Q41 430 53 430T79 430T104 429T122 428Q217 428 232 431H240V385H226Q187 384 184 370Q184 366 235 234L286 102L377 341V349Q377 363 367 372T349 383T335 385H331V431H338Z"></path><path stroke-width="1" id="MJMAIN-69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z"></path><path stroke-width="1" id="MJMAIN-64" d="M376 495Q376 511 376 535T377 568Q377 613 367 624T316 637H298V660Q298 683 300 683L310 684Q320 685 339 686T376 688Q393 689 413 690T443 693T454 694H457V390Q457 84 458 81Q461 61 472 55T517 46H535V0Q533 0 459 -5T380 -11H373V44L365 37Q307 -11 235 -11Q158 -11 96 50T34 215Q34 315 97 378T244 442Q319 442 376 393V495ZM373 342Q328 405 260 405Q211 405 173 369Q146 341 139 305T131 211Q131 155 138 120T173 59Q203 26 251 26Q322 26 373 103V342Z"></path><path stroke-width="1" id="MJMAIN-6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path stroke-width="1" id="MJMAIN-63" d="M370 305T349 305T313 320T297 358Q297 381 312 396Q317 401 317 402T307 404Q281 408 258 408Q209 408 178 376Q131 329 131 219Q131 137 162 90Q203 29 272 29Q313 29 338 55T374 117Q376 125 379 127T395 129H409Q415 123 415 120Q415 116 411 104T395 71T366 33T318 2T249 -11Q163 -11 99 53T34 214Q34 318 99 383T250 448T370 421T404 357Q404 334 387 320Z"></path><path stroke-width="1" id="MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path stroke-width="1" id="MJSZ2-2211" d="M60 948Q63 950 665 950H1267L1325 815Q1384 677 1388 669H1348L1341 683Q1320 724 1285 761Q1235 809 1174 838T1033 881T882 898T699 902H574H543H251L259 891Q722 258 724 252Q725 250 724 246Q721 243 460 -56L196 -356Q196 -357 407 -357Q459 -357 548 -357T676 -358Q812 -358 896 -353T1063 -332T1204 -283T1307 -196Q1328 -170 1348 -124H1388Q1388 -125 1381 -145T1356 -210T1325 -294L1267 -449L666 -450Q64 -450 61 -448Q55 -446 55 -439Q55 -437 57 -433L590 177Q590 178 557 222T452 366T322 544L56 909L55 924Q55 945 60 948Z"></path><path stroke-width="1" id="MJMATHI-6A" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path><path stroke-width="1" id="MJMATHI-57" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path><path stroke-width="1" id="MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path stroke-width="1" id="MJMATHI-62" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path><path stroke-width="1" id="MJMATHI-79" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="1" id="MJMAIN-73" d="M295 316Q295 356 268 385T190 414Q154 414 128 401Q98 382 98 349Q97 344 98 336T114 312T157 287Q175 282 201 278T245 269T277 256Q294 248 310 236T342 195T359 133Q359 71 321 31T198 -10H190Q138 -10 94 26L86 19L77 10Q71 4 65 -1L54 -11H46H42Q39 -11 33 -5V74V132Q33 153 35 157T45 162H54Q66 162 70 158T75 146T82 119T101 77Q136 26 198 26Q295 26 295 104Q295 133 277 151Q257 175 194 187T111 210Q75 227 54 256T33 318Q33 357 50 384T93 424T143 442T187 447H198Q238 447 268 432L283 424L292 431Q302 440 314 448H322H326Q329 448 335 442V310L329 304H301Q295 310 295 316Z"></path><path stroke-width="1" id="MJMAIN-6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"></path><path stroke-width="1" id="MJMAIN-66" d="M273 0Q255 3 146 3Q43 3 34 0H26V46H42Q70 46 91 49Q99 52 103 60Q104 62 104 224V385H33V431H104V497L105 564L107 574Q126 639 171 668T266 704Q267 704 275 704T289 705Q330 702 351 679T372 627Q372 604 358 590T321 576T284 590T270 627Q270 647 288 667H284Q280 668 273 668Q245 668 223 647T189 592Q183 572 182 497V431H293V385H185V225Q185 63 186 61T189 57T194 54T199 51T206 49T213 48T222 47T231 47T241 46T251 46H282V0H273Z"></path><path stroke-width="1" id="MJMAIN-74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z"></path><path stroke-width="1" id="MJMAIN-6D" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q351 442 364 440T387 434T406 426T421 417T432 406T441 395T448 384T452 374T455 366L457 361L460 365Q463 369 466 373T475 384T488 397T503 410T523 422T546 432T572 439T603 442Q729 442 740 329Q741 322 741 190V104Q741 66 743 59T754 49Q775 46 803 46H819V0H811L788 1Q764 2 737 2T699 3Q596 3 587 0H579V46H595Q656 46 656 62Q657 64 657 200Q656 335 655 343Q649 371 635 385T611 402T585 404Q540 404 506 370Q479 343 472 315T464 232V168V108Q464 78 465 68T468 55T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path stroke-width="1" id="MJMAIN-61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z"></path><path stroke-width="1" id="MJMAIN-78" d="M201 0Q189 3 102 3Q26 3 17 0H11V46H25Q48 47 67 52T96 61T121 78T139 96T160 122T180 150L226 210L168 288Q159 301 149 315T133 336T122 351T113 363T107 370T100 376T94 379T88 381T80 383Q74 383 44 385H16V431H23Q59 429 126 429Q219 429 229 431H237V385Q201 381 201 369Q201 367 211 353T239 315T268 274L272 270L297 304Q329 345 329 358Q329 364 327 369T322 376T317 380T310 384L307 385H302V431H309Q324 428 408 428Q487 428 493 431H499V385H492Q443 385 411 368Q394 360 377 341T312 257L296 236L358 151Q424 61 429 57T446 50Q464 46 499 46H516V0H510H502Q494 1 482 1T457 2T432 2T414 3Q403 3 377 3T327 1L304 0H295V46H298Q309 46 320 51T331 63Q331 65 291 120L250 175Q249 174 219 133T185 88Q181 83 181 74Q181 63 188 55T206 46Q208 46 208 23V0H201Z"></path><path stroke-width="1" id="MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path stroke-width="1" id="MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path stroke-width="1" id="MJMAIN-72" d="M36 46H50Q89 46 97 60V68Q97 77 97 91T98 122T98 161T98 203Q98 234 98 269T98 328L97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 60 434T96 436Q112 437 131 438T160 441T171 442H174V373Q213 441 271 441H277Q322 441 343 419T364 373Q364 352 351 337T313 322Q288 322 276 338T263 372Q263 381 265 388T270 400T273 405Q271 407 250 401Q234 393 226 386Q179 341 179 207V154Q179 141 179 127T179 101T180 81T180 66V61Q181 59 183 57T188 54T193 51T200 49T207 48T216 47T225 47T235 46T245 46H276V0H267Q249 3 140 3Q37 3 28 0H20V46H36Z"></path><path stroke-width="1" id="MJMAIN-6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"></path><path stroke-width="1" id="MJMAIN-7A" d="M42 263Q44 270 48 345T53 423V431H393Q399 425 399 415Q399 403 398 402L381 378Q364 355 331 309T265 220L134 41L182 40H206Q254 40 283 46T331 77Q352 105 359 185L361 201Q361 202 381 202H401V196Q401 195 393 103T384 6V0H209L34 1L31 3Q28 8 28 17Q28 30 29 31T160 210T294 394H236Q169 393 152 388Q127 382 113 367Q89 344 82 264V255H42V263Z"></path><path stroke-width="1" id="MJMAIN-70" d="M36 -148H50Q89 -148 97 -134V-126Q97 -119 97 -107T97 -77T98 -38T98 6T98 55T98 106Q98 140 98 177T98 243T98 296T97 335T97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 61 434T98 436Q115 437 135 438T165 441T176 442H179V416L180 390L188 397Q247 441 326 441Q407 441 464 377T522 216Q522 115 457 52T310 -11Q242 -11 190 33L182 40V-45V-101Q182 -128 184 -134T195 -145Q216 -148 244 -148H260V-194H252L228 -193Q205 -192 178 -192T140 -191Q37 -191 28 -194H20V-148H36ZM424 218Q424 292 390 347T305 402Q234 402 182 337V98Q222 26 294 26Q345 26 384 80T424 218Z"></path><path stroke-width="1" id="MJSZ1-2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path><path stroke-width="1" id="MJMATHI-48" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path><path stroke-width="1" id="MJMAIN-2032" d="M79 43Q73 43 52 49T30 61Q30 68 85 293T146 528Q161 560 198 560Q218 560 240 545T262 501Q262 496 260 486Q259 479 173 263T84 45T79 43Z"></path><path stroke-width="1" id="MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path stroke-width="1" id="MJMAIN-67" d="M329 409Q373 453 429 453Q459 453 472 434T485 396Q485 382 476 371T449 360Q416 360 412 390Q410 404 415 411Q415 412 416 414V415Q388 412 363 393Q355 388 355 386Q355 385 359 381T368 369T379 351T388 325T392 292Q392 230 343 187T222 143Q172 143 123 171Q112 153 112 133Q112 98 138 81Q147 75 155 75T227 73Q311 72 335 67Q396 58 431 26Q470 -13 470 -72Q470 -139 392 -175Q332 -206 250 -206Q167 -206 107 -175Q29 -140 29 -75Q29 -39 50 -15T92 18L103 24Q67 55 67 108Q67 155 96 193Q52 237 52 292Q52 355 102 398T223 442Q274 442 318 416L329 409ZM299 343Q294 371 273 387T221 404Q192 404 171 388T145 343Q142 326 142 292Q142 248 149 227T179 192Q196 182 222 182Q244 182 260 189T283 207T294 227T299 242Q302 258 302 292T299 343ZM403 -75Q403 -50 389 -34T348 -11T299 -2T245 0H218Q151 0 138 -6Q118 -15 107 -34T95 -74Q95 -84 101 -97T122 -127T170 -155T250 -167Q319 -167 361 -139T403 -75Z"></path></defs></svg></div><div id="MathJax_Message" style="display: none;"></div><div class="devsite-wrapper" style="margin-top: 48px;"><div class="devsite-top-section-wrapper
+            "><header class="devsite-top-section nocontent"><div class="devsite-top-logo-row-wrapper-wrapper" style="position: fixed;"><div class="devsite-top-logo-row-wrapper"><div class="devsite-top-logo-row devsite-full-site-width"><button type="button" class="devsite-expand-section-nav devsite-header-icon-button
+                                       button-flat material-icons gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Hamburger menu"></button><div class="devsite-product-name-wrapper"><a href="https://www.tensorflow.org/" class="devsite-site-logo-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Site logo"><img src="./MNIST For ML Beginners  _  TensorFlow_files/lockup.png" class="devsite-site-logo" alt="TensorFlow"><span class="devsite-site-name devsite-product-name">TensorFlow</span></a></div><div class="devsite-header-upper-tabs"><nav class="devsite-doc-set-nav devsite-nav devsite-overflow-tabs-scroll-wrapper"><ul class="devsite-doc-set-nav-tab-list devsite-overflow-tabs-scroll" style="min-width: 766px; left: 0px;"><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/install/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Install">
+        Install
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/get_started/" class="devsite-doc-set-nav-active
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Develop">
+        Develop
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/api_docs/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: API r1.2">
+        API r1.2
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/deploy/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Deploy">
+        Deploy
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/extend/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Extend">
+        Extend
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/community/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Community">
+        Community
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/versions/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Versions">
+        Versions
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/tfrc/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: TFRC">
+        TFRC
+      </a></li></ul><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-forward devsite-hidden"></button><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-back devsite-hidden"></button></nav></div><form class="devsite-search-form" action="https://www.tensorflow.org/s/results/" method="GET" id="top-search" search-placeholder="搜索"><div id="searchbox" class="devsite-searchbox"><input placeholder="搜索" type="text" class="devsite-search-field devsite-search-query" name="q" value="" autocomplete="off"><div class="devsite-search-image material-icons"></div></div><input type="hidden" name="p" id="search_project" value="/" data-project-name="TensorFlow" data-project-path="/" data-query-match=""><input type="hidden" class="suggest-project" value="TensorFlow"><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="Android Developers"></div><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="Android Open Source Project"></div><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="API.AI"></div><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="Google Cloud Platform"></div><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="Firebase"></div><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="Link.app"></div><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="Nest Developers"></div><div class="suggest-project-metadata" data-home_url="/" data-path="/" data-name="TensorFlow"></div><div class="devsite-popout devsite-popout-closed"><div class="devsite-suggest-results" style="display: none;"></div></div></form><a class="devsite-header-link devsite-top-button button gc-analytics-event" href="https://github.com/tensorflow" data-category="Site-Wide Custom Events" data-label="Site header link"><div class="devsite-header-link-label">GitHub</div></a><button type="button" class="devsite-search-button devsite-header-icon-button button-flat
+                                       material-icons"></button></div></div></div><div class="devsite-collapsible-section" style="margin-top: 0px;"><div class="devsite-header-background devsite-full-site-width"><div class="devsite-product-id-row devsite-full-site-width" style="visibility: visible;"><div class="devsite-product-description-row"><ul class="devsite-breadcrumb-list"><li class="devsite-breadcrumb-item">
+    
+    
+    
+      Develop
+    
+    
+  </li></ul></div></div><div class="devsite-doc-set-nav-row devsite-full-site-width"><nav class="devsite-doc-set-nav devsite-nav devsite-overflow-tabs-scroll-wrapper"><ul class="devsite-doc-set-nav-tab-list devsite-overflow-tabs-scroll" style="min-width: 605px; left: 0px;"><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/get_started/" class="devsite-doc-set-nav-active
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Get Started">
+        Get Started
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/programmers_guide/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Programmer&#39;s Guide">
+        Programmer's Guide
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/tutorials/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Tutorials">
+        Tutorials
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a href="https://www.tensorflow.org/performance/" class="
+                devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Performance">
+        Performance
+      </a></li></ul><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-forward devsite-hidden"></button><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-back devsite-hidden"></button></nav></div></div></div></header><script>
+    if (window.jQuery) {
+      $(document).ready(function() {
+        if (window.devsite && window.devsite.search) {
+          
+          window.devsite.search.init('zh-cn')
+        }
+      });
+    }
+  </script></div><div id="gc-wrapper" itemscope="" itemtype="http://schema.org/Article"><input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;TensorFlow&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-69864048-1&quot;}"><script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "HK", "language": {"requested": "zh-cn", "served": "en"}, "projectName": "TensorFlow", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+
+      
+        <div class="devsite-site-mask"></div>
+        
+  
+
+<nav class="devsite-nav-responsive devsite-nav nocontent" tabindex="0" style="left: -256px;">
+  
+  <div class="devsite-nav-responsive-tabs-panel devsite-nav-responsive-transition devsite-nav-responsive-transform" style="display: none;">
+    
+      
+        
+
+
+
+<nav class="devsite-nav-responsive-tabs devsite-nav">
+  <ul class="devsite-nav-list">
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/install/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Install"><span>
+        Install
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/get_started/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                devsite-nav-active" data-category="Site-Wide Custom Events" data-label="Responsive Tab: Develop"><span>
+        Develop
+      </span></a>
+      
+        
+
+
+
+<nav class="devsite-nav-responsive-tabs devsite-nav">
+  <ul class="devsite-nav-list">
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <span class="devsite-nav-responsive-forward devsite-nav-responsive-tab devsite-nav-title
+                   devsite-nav-active gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: Get Started" tabindex="0"><span>
+        Get Started
+      </span></span>
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/programmers_guide/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Programmer&#39;s Guide"><span>
+        Programmer's Guide
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/tutorials/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Tutorials"><span>
+        Tutorials
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/performance/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Performance"><span>
+        Performance
+      </span></a>
+      
+    
+    </li>
+  
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      <a href="https://github.com/tensorflow" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: GitHub"><span>
+        GitHub
+      </span></a>
+    </li>
+  
+  </ul>
+</nav>
+
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/api_docs/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: API r1.2"><span>
+        API r1.<wbr>2
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/deploy/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Deploy"><span>
+        Deploy
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/extend/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Extend"><span>
+        Extend
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/community/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Community"><span>
+        Community
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/versions/?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Versions"><span>
+        Versions
+      </span></a>
+      
+    
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+    
+      <a href="https://www.tensorflow.org/tfrc/" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                " data-category="Site-Wide Custom Events" data-label="Responsive Tab: TFRC"><span>
+        TFRC
+      </span></a>
+      
+    
+    </li>
+  
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      <a href="https://github.com/tensorflow" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: GitHub"><span>
+        GitHub
+      </span></a>
+    </li>
+  
+  </ul>
+</nav>
+
+      
+    
+  </div>
+  
+  
+  <div class="devsite-nav-responsive-sidebar-panel" style="display: block;">
+    
+    <div class="devsite-nav-responsive-back" tabindex="0"></div>
+    
+    <nav class="devsite-nav-responsive-sidebar">
+      <ul class="devsite-nav-list"><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Getting Started</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/get_started" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Getting Started With TensorFlow</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://www.tensorflow.org/get_started/mnist/beginners" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>MNIST For ML Beginners</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/pros" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Deep MNIST for Experts</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/mechanics" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorFlow Mechanics 101</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/tflearn" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>tf.<wbr>contrib.<wbr>learn Quickstart</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/input_fn" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Building Input Functions with tf.<wbr>contrib.<wbr>learn</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/monitors" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Logging and Monitoring Basics with tf.<wbr>contrib.<wbr>learn</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/summaries_and_tensorboard" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard: Visualizing Learning</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/embedding_viz" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard: Embedding Visualization</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/graph_viz" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard: Graph Visualization</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/tensorboard_histograms" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard Histogram Dashboard</span></a></li><li class="devsite-nav-item"><hr class="devsite-nav-break"></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/versions/" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorFlow Versions</span></a></li></ul>
+    </nav>
+  </div>
+  
+</nav>
+
+
+        <div class="devsite-main-content clearfix" style="margin-top: 40px;">
+
+        
+        
+
+        
+  
+  
+    
+    
+      
+  <nav class="devsite-section-nav devsite-nav nocontent" style="left: auto; max-height: 1033px; position: relative; top: 0px;">
+    <ul class="devsite-nav-list"><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Getting Started</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/get_started" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Getting Started With TensorFlow</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://www.tensorflow.org/get_started/mnist/beginners" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>MNIST For ML Beginners</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/pros" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Deep MNIST for Experts</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/mechanics" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorFlow Mechanics 101</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/tflearn" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>tf.<wbr>contrib.<wbr>learn Quickstart</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/input_fn" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Building Input Functions with tf.<wbr>contrib.<wbr>learn</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/monitors" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>Logging and Monitoring Basics with tf.<wbr>contrib.<wbr>learn</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/summaries_and_tensorboard" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard: Visualizing Learning</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/embedding_viz" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard: Embedding Visualization</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/graph_viz" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard: Graph Visualization</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/tensorboard_histograms" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorBoard Histogram Dashboard</span></a></li><li class="devsite-nav-item"><hr class="devsite-nav-break"></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/versions/" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="0" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click"><span>TensorFlow Versions</span></a></li></ul>
+  </nav>
+
+    
+
+    
+  <nav class="devsite-page-nav devsite-nav" style="position: relative; left: auto; max-height: 1033px; top: 0px;"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-nav-title"><span>目录</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#about_this_tutorial" class="devsite-nav-title"><span>About this tutorial</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#the_mnist_data" class="devsite-nav-title"><span>The MNIST Data</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#softmax_regressions" class="devsite-nav-title"><span>Softmax Regressions</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#implementing_the_regression" class="devsite-nav-title"><span>Implementing the Regression</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#training" class="devsite-nav-title"><span>Training</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#evaluating_our_model" class="devsite-nav-title"><span>Evaluating Our Model</span></a></li></ul></nav>
+
+
+      <article class="devsite-article">
+        <article class="devsite-article-inner">
+  
+          
+  
+
+
+
+  
+  <nav class="devsite-breadcrumb-nav devsite-nav">
+    
+
+
+<ul class="devsite-breadcrumb-list">
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <a href="https://www.tensorflow.org/products/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1">
+    
+    
+      产品
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://www.tensorflow.org/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2">
+    
+    
+      TensorFlow
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://www.tensorflow.org/get_started/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="3">
+    
+    
+      Develop
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://www.tensorflow.org/get_started/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="4">
+    
+    
+      Get Started
+    
+    
+    </a>
+    
+  </li>
+  
+</ul>
+
+  </nav>
+  
+  
+  <h1 itemprop="name" class="devsite-page-title">
+    MNIST For ML Beginners
+  </h1>
+  
+  
+  <nav class="devsite-page-nav-embedded devsite-nav"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-nav-title"><span>目录</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#about_this_tutorial" class="devsite-nav-title"><span>About this tutorial</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#the_mnist_data" class="devsite-nav-title"><span>The MNIST Data</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#softmax_regressions" class="devsite-nav-title"><span>Softmax Regressions</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#implementing_the_regression" class="devsite-nav-title"><span>Implementing the Regression</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#training" class="devsite-nav-title"><span>Training</span></a></li><li class="devsite-nav-item"><a href="https://www.tensorflow.org/get_started/mnist/beginners#evaluating_our_model" class="devsite-nav-title"><span>Evaluating Our Model</span></a></li></ul></nav>
+  
+  <div class="devsite-article-body clearfix
+            " itemprop="articleBody">
+    
+<script src="./MNIST For ML Beginners  _  TensorFlow_files/MathJax.js.下载"></script>
+
+<!-- DO NOT EDIT! Automatically generated file. -->
+
+<!-- DO NOT EDIT! Automatically generated file. -->
+
+
+<p><em>This tutorial is intended for readers who are new to both machine learning and
+TensorFlow. If you already know what MNIST is, and what softmax (multinomial
+logistic) regression is, you might prefer this
+<a href="https://www.tensorflow.org/get_started/mnist/pros">faster paced tutorial</a>.  Be sure to
+<a href="https://www.tensorflow.org/install/index">install TensorFlow</a> before starting either
+tutorial.</em></p>
+<p>When one learns how to program, there's a tradition that the first thing you do
+is print "Hello World." Just like programming has Hello World, machine learning
+has MNIST.</p>
+<p>MNIST is a simple computer vision dataset. It consists of images of handwritten
+digits like these:</p>
+<div style="width:40%; margin:auto; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/MNIST.png">
+</div>
+
+<p>It also includes labels for each image, telling us which digit it is. For
+example, the labels for the above images are 5, 0, 4, and 1.</p>
+<p>In this tutorial, we're going to train a model to look at images and predict
+what digits they are. Our goal isn't to train a really elaborate model that
+achieves state-of-the-art performance -- although we'll give you code to do that
+later! -- but rather to dip a toe into using TensorFlow. As such, we're going
+to start with a very simple model, called a Softmax Regression.</p>
+<p>The actual code for this tutorial is very short, and all the interesting
+stuff happens in just three lines. However, it is very
+important to understand the ideas behind it: both how TensorFlow works and the
+core machine learning concepts. Because of this, we are going to very carefully
+work through the code.</p>
+<h2 id="about_this_tutorial"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>About this tutorial</h2>
+<p>This tutorial is an explanation, line by line, of what is happening in the
+<a href="https://www.github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/examples/tutorials/mnist/mnist_softmax.py">mnist_softmax.py</a> code.</p>
+<p>You can use this tutorial in a few different ways, including:</p>
+<ul>
+<li>
+<p>Copy and paste each code snippet, line by line, into a Python environment as
+  you read through the explanations of each line.</p>
+</li>
+<li>
+<p>Run the entire <code>mnist_softmax.py</code> Python file either before or after reading
+  through the explanations, and use this tutorial to understand the lines of
+  code that aren't clear to you.</p>
+</li>
+</ul>
+<p>What we will accomplish in this tutorial:</p>
+<ul>
+<li>
+<p>Learn about the MNIST data and softmax regressions</p>
+</li>
+<li>
+<p>Create a function that is a model for recognizing digits, based on looking at
+  every pixel in the image</p>
+</li>
+<li>
+<p>Use TensorFlow to train the model to recognize digits by having it "look" at
+  thousands of examples (and run our first TensorFlow session to do so)</p>
+</li>
+<li>
+<p>Check the model's accuracy with our test data</p>
+</li>
+</ul>
+<h2 id="the_mnist_data"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>The MNIST Data</h2>
+<p>The MNIST data is hosted on
+<a href="http://yann.lecun.com/exdb/mnist/">Yann LeCun's website</a>.  If you are copying and
+pasting in the code from this tutorial, start here with these two lines of code
+which will download and read in the data automatically:</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="kwd">from</span><span class="pln"> tensorflow</span><span class="pun">.</span><span class="pln">examples</span><span class="pun">.</span><span class="pln">tutorials</span><span class="pun">.</span><span class="pln">mnist </span><span class="kwd">import</span><span class="pln"> input_data<br>mnist </span><span class="pun">=</span><span class="pln"> input_data</span><span class="pun">.</span><span class="pln">read_data_sets</span><span class="pun">(</span><span class="str">"MNIST_data/"</span><span class="pun">,</span><span class="pln"> one_hot</span><span class="pun">=</span><span class="kwd">True</span><span class="pun">)</span><span class="pln"><br></span></code></pre>
+
+<p>The MNIST data is split into three parts: 55,000 data points of training
+data (<code>mnist.train</code>), 10,000 points of test data (<code>mnist.test</code>), and 5,000
+points of validation data (<code>mnist.validation</code>). This split is very important:
+it's essential in machine learning that we have separate data which we don't
+learn from so that we can make sure that what we've learned actually
+generalizes!</p>
+<p>As mentioned earlier, every MNIST data point has two parts: an image of a
+handwritten digit and a corresponding label. We'll call the images "x"
+and the labels "y". Both the training set and test set contain images and their
+corresponding labels; for example the training images are <code>mnist.train.images</code>
+and the training labels are <code>mnist.train.labels</code>.</p>
+<p>Each image is 28 pixels by 28 pixels. We can interpret this as a big array of
+numbers:</p>
+<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/MNIST-Matrix.png">
+</div>
+
+<p>We can flatten this array into a vector of 28x28 = 784 numbers. It doesn't
+matter how we flatten the array, as long as we're consistent between images.
+From this perspective, the MNIST images are just a bunch of points in a
+784-dimensional vector space, with a
+<a href="http://colah.github.io/posts/2014-10-Visualizing-MNIST/">very rich structure</a>
+(warning: computationally intensive visualizations).</p>
+<p>Flattening the data throws away information about the 2D structure of the image.
+Isn't that bad? Well, the best computer vision methods do exploit this
+structure, and we will in later tutorials. But the simple method we will be
+using here, a softmax regression (defined below), won't.</p>
+<p>The result is that <code>mnist.train.images</code> is a tensor (an n-dimensional array)
+with a shape of <code>[55000, 784]</code>. The first dimension is an index into the list
+of images and the second dimension is the index for each pixel in each image.
+Each entry in the tensor is a pixel intensity between 0 and 1, for a particular
+pixel in a particular image.</p>
+<div style="width:40%; margin:auto; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/mnist-train-xs.png">
+</div>
+
+<p>Each image in MNIST has a corresponding label, a number between 0 and 9
+representing the digit drawn in the image.</p>
+<p>For the purposes of this tutorial, we're going to want our labels as "one-hot
+vectors". A one-hot vector is a vector which is 0 in most dimensions, and 1 in a
+single dimension. In this case, the <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-1-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.429ex" viewBox="0 -511.5 600.5 615.4" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-6E" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-1">n</script>th digit will be represented as a
+vector which is 1 in the <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-2-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.429ex" viewBox="0 -511.5 600.5 615.4" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-6E" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-2">n</script>th dimension. For example, 3 would be
+<span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-3-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="22.224ex" height="2.613ex" viewBox="0 -817.3 9568.5 1125" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-5B" x="0" y="0"></use><use href="#MJMAIN-30" x="278" y="0"></use><use href="#MJMAIN-2C" x="779" y="0"></use><use href="#MJMAIN-30" x="1224" y="0"></use><use href="#MJMAIN-2C" x="1724" y="0"></use><use href="#MJMAIN-30" x="2169" y="0"></use><use href="#MJMAIN-2C" x="2670" y="0"></use><use href="#MJMAIN-31" x="3115" y="0"></use><use href="#MJMAIN-2C" x="3616" y="0"></use><use href="#MJMAIN-30" x="4061" y="0"></use><use href="#MJMAIN-2C" x="4561" y="0"></use><use href="#MJMAIN-30" x="5006" y="0"></use><use href="#MJMAIN-2C" x="5507" y="0"></use><use href="#MJMAIN-30" x="5952" y="0"></use><use href="#MJMAIN-2C" x="6453" y="0"></use><use href="#MJMAIN-30" x="6898" y="0"></use><use href="#MJMAIN-2C" x="7398" y="0"></use><use href="#MJMAIN-30" x="7843" y="0"></use><use href="#MJMAIN-2C" x="8344" y="0"></use><use href="#MJMAIN-30" x="8789" y="0"></use><use href="#MJMAIN-5D" x="9290" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false">]</mo></math></span></span><script type="math/tex" id="MathJax-Element-3">[0,0,0,1,0,0,0,0,0,0]</script>.  Consequently, <code>mnist.train.labels</code> is a
+<code>[55000, 10]</code> array of floats.</p>
+<div style="width:40%; margin:auto; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/mnist-train-ys.png">
+</div>
+
+<p>We're now ready to actually make our model!</p>
+<h2 id="softmax_regressions"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Softmax Regressions</h2>
+<p>We know that every image in MNIST is of a handwritten digit between zero and
+nine.  So there are only ten possible things that a given image can be. We want
+to be able to look at an image and give the probabilities for it being each
+digit. For example, our model might look at a picture of a nine and be 80% sure
+it's a nine, but give a 5% chance to it being an eight (because of the top loop)
+and a bit of probability to all the others because it isn't 100% sure.</p>
+<p>This is a classic case where a softmax regression is a natural, simple model.
+If you want to assign probabilities to an object being one of several different
+things, softmax is the thing to do, because softmax gives us a list of values
+between 0 and 1 that add up to 1. Even later on, when we train more sophisticated
+models, the final step will be a layer of softmax.</p>
+<p>A softmax regression has two steps: first we add up the evidence of our input
+being in certain classes, and then we convert that evidence into probabilities.</p>
+<p>To tally up the evidence that a given image is in a particular class, we do a
+weighted sum of the pixel intensities. The weight is negative if that pixel
+having a high intensity is evidence against the image being in that class, and
+positive if it is evidence in favor.</p>
+<p>The following diagram shows the weights one model learned for each of these
+classes. Red represents negative weights, while blue represents positive
+weights.</p>
+<div style="width:40%; margin:auto; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/softmax-weights.png">
+</div>
+
+<p>We also add some extra evidence called a bias. Basically, we want to be able
+to say that some things are more likely independent of the input. The result is
+that the evidence for a class <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-4-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0.802ex" height="1.903ex" viewBox="0 -715.3 345.5 819.3" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-69" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi></math></span></span><script type="math/tex" id="MathJax-Element-4">i</script> given an input <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-5-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.429ex" viewBox="0 -511.5 572.5 615.4" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-78" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-5">x</script> is:</p>
+<div> <span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-6-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;msub&gt;&lt;mtext&gt;evidence&lt;/mtext&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;munder&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/munder&gt;&lt;msub&gt;&lt;mi&gt;W&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mtext&gt;&amp;#xA0;&lt;/mtext&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;msub&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/msub&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="27.815ex" height="5.69ex" viewBox="0 -1021.1 11975.9 2449.8" role="img" focusable="false" style="vertical-align: -3.318ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-65"></use><use href="#MJMAIN-76" x="444" y="0"></use><use href="#MJMAIN-69" x="973" y="0"></use><use href="#MJMAIN-64" x="1251" y="0"></use><use href="#MJMAIN-65" x="1808" y="0"></use><use href="#MJMAIN-6E" x="2252" y="0"></use><use href="#MJMAIN-63" x="2809" y="0"></use><use href="#MJMAIN-65" x="3253" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="5229" y="-213"></use><use href="#MJMAIN-3D" x="4320" y="0"></use><g transform="translate(5376,0)"><use href="#MJSZ2-2211" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-6A" x="815" y="-1536"></use></g><g transform="translate(6987,0)"><use href="#MJMATHI-57" x="0" y="0"></use><g transform="translate(944,-150)"><use transform="scale(0.707)" href="#MJMATHI-69" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-2C" x="345" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-6A" x="977" y="0"></use></g></g><g transform="translate(9014,0)"><use href="#MJMATHI-78" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-6A" x="809" y="-213"></use></g><use href="#MJMAIN-2B" x="10201" y="0"></use><g transform="translate(11202,0)"><use href="#MJMATHI-62" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="607" y="-213"></use></g></g></svg><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mtext>evidence</mtext><mi>i</mi></msub><mo>=</mo><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>W</mi><mrow class="MJX-TeXAtom-ORD"><mi>i</mi><mo>,</mo><mtext>&nbsp;</mtext><mi>j</mi></mrow></msub><msub><mi>x</mi><mi>j</mi></msub><mo>+</mo><msub><mi>b</mi><mi>i</mi></msub></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-6">\text{evidence}_i = \sum_j W_{i,~ j} x_j + b_i</script> </div>
+
+<p>where <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-7-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;W&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.993ex" height="2.376ex" viewBox="0 -766.3 1288.8 1023.1" role="img" focusable="false" style="vertical-align: -0.596ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-57" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="1335" y="-213"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>i</mi></msub></math></span></span><script type="math/tex" id="MathJax-Element-7">W_i</script> is the weights and <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-8-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.797ex" height="2.376ex" viewBox="0 -766.3 773.8 1023.1" role="img" focusable="false" style="vertical-align: -0.596ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-62" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="607" y="-213"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>b</mi><mi>i</mi></msub></math></span></span><script type="math/tex" id="MathJax-Element-8">b_i</script> is the bias for class <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-9-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0.802ex" height="1.903ex" viewBox="0 -715.3 345.5 819.3" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-69" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi></math></span></span><script type="math/tex" id="MathJax-Element-9">i</script>,
+and <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-10-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0.985ex" height="2.376ex" viewBox="-11.5 -715.3 424 1023.1" role="img" focusable="false" style="vertical-align: -0.715ex; margin-left: -0.027ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-6A" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>j</mi></math></span></span><script type="math/tex" id="MathJax-Element-10">j</script> is an index for summing over the pixels in our input image <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-11-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.429ex" viewBox="0 -511.5 572.5 615.4" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-78" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-11">x</script>.
+We then convert the evidence tallies into our predicted probabilities
+<span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-12-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.155ex" height="1.903ex" viewBox="0 -511.5 497.5 819.3" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-79" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>y</mi></math></span></span><script type="math/tex" id="MathJax-Element-12">y</script> using the "softmax" function:</p>
+<div> <span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-13-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mtext&gt;softmax&lt;/mtext&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mtext&gt;evidence&lt;/mtext&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="22.673ex" height="2.613ex" viewBox="0 -817.3 9762.1 1125" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-79" x="0" y="0"></use><use href="#MJMAIN-3D" x="775" y="0"></use><g transform="translate(1831,0)"><use href="#MJMAIN-73"></use><use href="#MJMAIN-6F" x="394" y="0"></use><use href="#MJMAIN-66" x="895" y="0"></use><use href="#MJMAIN-74" x="1201" y="0"></use><use href="#MJMAIN-6D" x="1591" y="0"></use><use href="#MJMAIN-61" x="2424" y="0"></use><use href="#MJMAIN-78" x="2925" y="0"></use></g><use href="#MJMAIN-28" x="5285" y="0"></use><g transform="translate(5674,0)"><use href="#MJMAIN-65"></use><use href="#MJMAIN-76" x="444" y="0"></use><use href="#MJMAIN-69" x="973" y="0"></use><use href="#MJMAIN-64" x="1251" y="0"></use><use href="#MJMAIN-65" x="1808" y="0"></use><use href="#MJMAIN-6E" x="2252" y="0"></use><use href="#MJMAIN-63" x="2809" y="0"></use><use href="#MJMAIN-65" x="3253" y="0"></use></g><use href="#MJMAIN-29" x="9372" y="0"></use></g></svg><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>y</mi><mo>=</mo><mtext>softmax</mtext><mo stretchy="false">(</mo><mtext>evidence</mtext><mo stretchy="false">)</mo></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-13">y = \text{softmax}(\text{evidence})</script> </div>
+
+<p>Here softmax is serving as an "activation" or "link" function, shaping
+the output of our linear function into the form we want -- in this case, a
+probability distribution over 10 cases.
+You can think of it as converting tallies
+of evidence into probabilities of our input being in each class.
+It's defined as:</p>
+<div> <span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-14-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mtext&gt;softmax&lt;/mtext&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mtext&gt;normalize&lt;/mtext&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;exp&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="32.583ex" height="2.613ex" viewBox="0 -817.3 14028.6 1125" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-73"></use><use href="#MJMAIN-6F" x="394" y="0"></use><use href="#MJMAIN-66" x="895" y="0"></use><use href="#MJMAIN-74" x="1201" y="0"></use><use href="#MJMAIN-6D" x="1591" y="0"></use><use href="#MJMAIN-61" x="2424" y="0"></use><use href="#MJMAIN-78" x="2925" y="0"></use><use href="#MJMAIN-28" x="3453" y="0"></use><use href="#MJMATHI-78" x="3843" y="0"></use><use href="#MJMAIN-29" x="4415" y="0"></use><use href="#MJMAIN-3D" x="5082" y="0"></use><g transform="translate(6139,0)"><use href="#MJMAIN-6E"></use><use href="#MJMAIN-6F" x="556" y="0"></use><use href="#MJMAIN-72" x="1057" y="0"></use><use href="#MJMAIN-6D" x="1449" y="0"></use><use href="#MJMAIN-61" x="2283" y="0"></use><use href="#MJMAIN-6C" x="2783" y="0"></use><use href="#MJMAIN-69" x="3062" y="0"></use><use href="#MJMAIN-7A" x="3340" y="0"></use><use href="#MJMAIN-65" x="3785" y="0"></use></g><use href="#MJMAIN-28" x="10368" y="0"></use><g transform="translate(10758,0)"><use href="#MJMAIN-65"></use><use href="#MJMAIN-78" x="444" y="0"></use><use href="#MJMAIN-70" x="973" y="0"></use></g><use href="#MJMAIN-28" x="12287" y="0"></use><use href="#MJMATHI-78" x="12677" y="0"></use><use href="#MJMAIN-29" x="13249" y="0"></use><use href="#MJMAIN-29" x="13639" y="0"></use></g></svg><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>softmax</mtext><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mtext>normalize</mtext><mo stretchy="false">(</mo><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-14">\text{softmax}(x) = \text{normalize}(\exp(x))</script> </div>
+
+<p>If you expand that equation out, you get:</p>
+<div> <span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-15-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mtext&gt;softmax&lt;/mtext&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;mi&gt;exp&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;munder&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/munder&gt;&lt;mi&gt;exp&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="27.246ex" height="6.4ex" viewBox="0 -1530.6 11730.9 2755.5" role="img" focusable="false" style="vertical-align: -2.845ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-73"></use><use href="#MJMAIN-6F" x="394" y="0"></use><use href="#MJMAIN-66" x="895" y="0"></use><use href="#MJMAIN-74" x="1201" y="0"></use><use href="#MJMAIN-6D" x="1591" y="0"></use><use href="#MJMAIN-61" x="2424" y="0"></use><use href="#MJMAIN-78" x="2925" y="0"></use><use href="#MJMAIN-28" x="3453" y="0"></use><use href="#MJMATHI-78" x="3843" y="0"></use><g transform="translate(4415,0)"><use href="#MJMAIN-29" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="550" y="-213"></use></g><use href="#MJMAIN-3D" x="5427" y="0"></use><g transform="translate(6205,0)"><g transform="translate(397,0)"><rect stroke="none" width="5007" height="60" x="0" y="220"></rect><g transform="translate(891,718)"><use href="#MJMAIN-65"></use><use href="#MJMAIN-78" x="444" y="0"></use><use href="#MJMAIN-70" x="973" y="0"></use><use href="#MJMAIN-28" x="1529" y="0"></use><g transform="translate(1919,0)"><use href="#MJMATHI-78" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="809" y="-213"></use></g><use href="#MJMAIN-29" x="2835" y="0"></use></g><g transform="translate(60,-719)"><use href="#MJSZ1-2211" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-6A" x="1494" y="-405"></use><g transform="translate(1614,0)"><use href="#MJMAIN-65"></use><use href="#MJMAIN-78" x="444" y="0"></use><use href="#MJMAIN-70" x="973" y="0"></use></g><use href="#MJMAIN-28" x="3144" y="0"></use><g transform="translate(3533,0)"><use href="#MJMATHI-78" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-6A" x="809" y="-213"></use></g><use href="#MJMAIN-29" x="4498" y="0"></use></g></g></g></g></svg><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>softmax</mtext><mo stretchy="false">(</mo><mi>x</mi><msub><mo stretchy="false">)</mo><mi>i</mi></msub><mo>=</mo><mfrac><mrow><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mrow><munder><mo>∑</mo><mi>j</mi></munder><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></mfrac></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-15">\text{softmax}(x)_i = \frac{\exp(x_i)}{\sum_j \exp(x_j)}</script> </div>
+
+<p>But it's often more helpful to think of softmax the first way: exponentiating
+its inputs and then normalizing them.  The exponentiation means that one more
+unit of evidence increases the weight given to any hypothesis multiplicatively.
+And conversely, having one less unit of evidence means that a hypothesis gets a
+fraction of its earlier weight. No hypothesis ever has zero or negative
+weight. Softmax then normalizes these weights, so that they add up to one,
+forming a valid probability distribution. (To get more intuition about the
+softmax function, check out the
+<a href="http://neuralnetworksanddeeplearning.com/chap3.html#softmax">section</a> on it in
+Michael Nielsen's book, complete with an interactive visualization.)</p>
+<p>You can picture our softmax regression as looking something like the following,
+although with a lot more <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-16-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.429ex" viewBox="0 -511.5 572.5 615.4" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-78" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-16">x</script>s. For each output, we compute a weighted sum of
+the <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-17-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.429ex" viewBox="0 -511.5 572.5 615.4" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-78" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-17">x</script>s, add a bias, and then apply softmax.</p>
+<div style="width:55%; margin:auto; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/softmax-regression-scalargraph.png">
+</div>
+
+<p>If we write that out as equations, we get:</p>
+<div style="width:52%; margin-left:25%; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/softmax-regression-scalarequation.png" alt="[y1, y2, y3] = softmax(W11*x1 + W12*x2 + W13*x3 + b1,  W21*x1 + W22*x2 + W23*x3 + b2,  W31*x1 + W32*x2 + W33*x3 + b3)">
+</div>
+
+<p>We can "vectorize" this procedure, turning it into a matrix multiplication
+and vector addition. This is helpful for computational efficiency. (It's also
+a useful way to think.)</p>
+<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;">
+<img style="width:100%" src="./MNIST For ML Beginners  _  TensorFlow_files/softmax-regression-vectorequation.png" alt="[y1, y2, y3] = softmax([[W11, W12, W13], [W21, W22, W23], [W31, W32, W33]]*[x1, x2, x3] + [b1, b2, b3])">
+</div>
+
+<p>More compactly, we can just write:</p>
+<div> <span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-18-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mtext&gt;softmax&lt;/mtext&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;W&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="21.687ex" height="2.613ex" viewBox="0 -817.3 9337.5 1125" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-79" x="0" y="0"></use><use href="#MJMAIN-3D" x="775" y="0"></use><g transform="translate(1831,0)"><use href="#MJMAIN-73"></use><use href="#MJMAIN-6F" x="394" y="0"></use><use href="#MJMAIN-66" x="895" y="0"></use><use href="#MJMAIN-74" x="1201" y="0"></use><use href="#MJMAIN-6D" x="1591" y="0"></use><use href="#MJMAIN-61" x="2424" y="0"></use><use href="#MJMAIN-78" x="2925" y="0"></use></g><use href="#MJMAIN-28" x="5285" y="0"></use><use href="#MJMATHI-57" x="5674" y="0"></use><use href="#MJMATHI-78" x="6723" y="0"></use><use href="#MJMAIN-2B" x="7517" y="0"></use><use href="#MJMATHI-62" x="8518" y="0"></use><use href="#MJMAIN-29" x="8948" y="0"></use></g></svg><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>y</mi><mo>=</mo><mtext>softmax</mtext><mo stretchy="false">(</mo><mi>W</mi><mi>x</mi><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-18">y = \text{softmax}(Wx + b)</script> </div>
+
+<p>Now let's turn that into something that TensorFlow can use.</p>
+<h2 id="implementing_the_regression"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Implementing the Regression</h2>
+<p>To do efficient numerical computing in Python, we typically use libraries like
+<a href="http://www.numpy.org/">NumPy</a> that do expensive operations such as matrix
+multiplication outside Python, using highly efficient code implemented in
+another language.  Unfortunately, there can still be a lot of overhead from
+switching back to Python every operation. This overhead is especially bad if you
+want to run computations on GPUs or in a distributed manner, where there can be
+a high cost to transferring data.</p>
+<p>TensorFlow also does its heavy lifting outside Python, but it takes things a
+step further to avoid this overhead.  Instead of running a single expensive
+operation independently from Python, TensorFlow lets us describe a graph of
+interacting operations that run entirely outside Python. (Approaches like this
+can be seen in a few machine learning libraries.)</p>
+<p>To use TensorFlow, first we need to import it.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="kwd">import</span><span class="pln"> tensorflow </span><span class="kwd">as</span><span class="pln"> tf<br></span></code></pre>
+
+<p>We describe these interacting operations by manipulating symbolic variables.
+Let's create one:</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">x </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">placeholder</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">float32</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="kwd">None</span><span class="pun">,</span><span class="pln"> </span><span class="lit">784</span><span class="pun">])</span><span class="pln"><br></span></code></pre>
+
+<p><code>x</code> isn't a specific value. It's a <code>placeholder</code>, a value that we'll input when
+we ask TensorFlow to run a computation. We want to be able to input any number
+of MNIST images, each flattened into a 784-dimensional vector. We represent
+this as a 2-D tensor of floating-point numbers, with a shape <code>[None, 784]</code>.
+(Here <code>None</code> means that a dimension can be of any length.)</p>
+<p>We also need the weights and biases for our model. We could imagine treating
+these like additional inputs, but TensorFlow has an even better way to handle
+it: <code>Variable</code>.  A <code>Variable</code> is a modifiable tensor that lives in TensorFlow's
+graph of interacting operations. It can be used and even modified by the
+computation. For machine learning applications, one generally has the model
+parameters be <code>Variable</code>s.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">W </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">Variable</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">zeros</span><span class="pun">([</span><span class="lit">784</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">]))</span><span class="pln"><br>b </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">Variable</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">zeros</span><span class="pun">([</span><span class="lit">10</span><span class="pun">]))</span><span class="pln"><br></span></code></pre>
+
+<p>We create these <code>Variable</code>s by giving <code>tf.Variable</code> the initial value of the
+<code>Variable</code>: in this case, we initialize both <code>W</code> and <code>b</code> as tensors full of
+zeros. Since we are going to learn <code>W</code> and <code>b</code>, it doesn't matter very much
+what they initially are.</p>
+<p>Notice that <code>W</code> has a shape of [784, 10] because we want to multiply the
+784-dimensional image vectors by it to produce 10-dimensional vectors of
+evidence for the difference classes. <code>b</code> has a shape of [10] so we can add it
+to the output.</p>
+<p>We can now implement our model. It only takes one line to define it!</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">y </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">nn</span><span class="pun">.</span><span class="pln">softmax</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">matmul</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> W</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> b</span><span class="pun">)</span><span class="pln"><br></span></code></pre>
+
+<p>First, we multiply <code>x</code> by <code>W</code> with the expression <code>tf.matmul(x, W)</code>. This is
+flipped from when we multiplied them in our equation, where we had <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-19-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;W&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.765ex" height="2.021ex" viewBox="0 -766.3 1621 870.2" role="img" focusable="false" style="vertical-align: -0.241ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-57" x="0" y="0"></use><use href="#MJMATHI-78" x="1048" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-19">Wx</script>, as
+a small trick to deal with <code>x</code> being a 2D tensor with multiple inputs. We then
+add <code>b</code>, and finally apply <code>tf.nn.softmax</code>.</p>
+<p>That's it. It only took us one line to define our model, after a couple short
+lines of setup. That isn't because TensorFlow is designed to make a softmax
+regression particularly easy: it's just a very flexible way to describe many
+kinds of numerical computations, from machine learning models to physics
+simulations. And once defined, our model can be run on different devices:
+your computer's CPU, GPUs, and even phones!</p>
+<h2 id="training"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Training</h2>
+<p>In order to train our model, we need to define what it means for the model to be
+good. Well, actually, in machine learning we typically define what it means for
+a model to be bad. We call this the cost, or the loss, and it represents how far
+off our model is from our desired outcome. We try to minimize that error, and
+the smaller the error margin, the better our model is.</p>
+<p>One very common, very nice function to determine the loss of a model is called
+"cross-entropy." Cross-entropy arises from thinking about information
+compressing codes in information theory but it winds up being an important idea
+in lots of areas, from gambling to machine learning. It's defined as:</p>
+<div> <span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-20-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;msub&gt;&lt;mi&gt;H&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;msup&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;&amp;#x2032;&lt;/mo&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;munder&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/munder&gt;&lt;msubsup&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;&amp;#x2032;&lt;/mo&gt;&lt;/msubsup&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="24.515ex" height="5.335ex" viewBox="0 -1021.1 10554.9 2296.9" role="img" focusable="false" style="vertical-align: -2.963ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-48" x="0" y="0"></use><g transform="translate(831,-150)"><use transform="scale(0.707)" href="#MJMATHI-79" x="0" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-2032" x="706" y="408"></use></g><use href="#MJMAIN-28" x="1493" y="0"></use><use href="#MJMATHI-79" x="1882" y="0"></use><use href="#MJMAIN-29" x="2380" y="0"></use><use href="#MJMAIN-3D" x="3047" y="0"></use><use href="#MJMAIN-2212" x="4103" y="0"></use><g transform="translate(5049,0)"><use href="#MJSZ2-2211" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="848" y="-1536"></use></g><g transform="translate(6660,0)"><use href="#MJMATHI-79" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-2032" x="706" y="445"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="693" y="-430"></use></g><g transform="translate(7661,0)"><use href="#MJMAIN-6C"></use><use href="#MJMAIN-6F" x="278" y="0"></use><use href="#MJMAIN-67" x="779" y="0"></use></g><use href="#MJMAIN-28" x="8941" y="0"></use><g transform="translate(9330,0)"><use href="#MJMATHI-79" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMATHI-69" x="693" y="-213"></use></g><use href="#MJMAIN-29" x="10165" y="0"></use></g></svg><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>H</mi><mrow class="MJX-TeXAtom-ORD"><msup><mi>y</mi><mo>′</mo></msup></mrow></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><munder><mo>∑</mo><mi>i</mi></munder><msubsup><mi>y</mi><mi>i</mi><mo>′</mo></msubsup><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-20">H_{y'}(y) = -\sum_i y'_i \log(y_i)</script> </div>
+
+<p>Where <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-21-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.155ex" height="1.903ex" viewBox="0 -511.5 497.5 819.3" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-79" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>y</mi></math></span></span><script type="math/tex" id="MathJax-Element-21">y</script> is our predicted probability distribution, and <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-22-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msup&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;&amp;#x2032;&lt;/mo&gt;&lt;/msup&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.845ex" height="2.613ex" viewBox="0 -817.3 794.5 1125" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-79" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-2032" x="706" y="513"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>y</mi><mo>′</mo></msup></math></span></span><script type="math/tex" id="MathJax-Element-22">y'</script> is the true
+distribution (the one-hot vector with the digit labels).  In some rough sense, the
+cross-entropy is measuring how inefficient our predictions are for describing
+the truth. Going into more detail about cross-entropy is beyond the scope of
+this tutorial, but it's well worth
+<a href="http://colah.github.io/posts/2015-09-Visual-Information/">understanding</a>.</p>
+<p>To implement cross-entropy we need to first add a new placeholder to input the
+correct answers:</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">y_ </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">placeholder</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">float32</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="kwd">None</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">])</span><span class="pln"><br></span></code></pre>
+
+<p>Then we can implement the cross-entropy function, <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax_SVG" id="MathJax-Element-23-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;&amp;#x2032;&lt;/mo&gt;&lt;/msup&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.205ex" height="2.613ex" viewBox="0 -817.3 5685.5 1125" role="img" focusable="false" style="vertical-align: -0.715ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-2212" x="0" y="0"></use><use href="#MJSZ1-2211" x="945" y="0"></use><g transform="translate(2168,0)"><use href="#MJMATHI-79" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-2032" x="706" y="513"></use></g><g transform="translate(3129,0)"><use href="#MJMAIN-6C"></use><use href="#MJMAIN-6F" x="278" y="0"></use><use href="#MJMAIN-67" x="779" y="0"></use></g><use href="#MJMAIN-28" x="4408" y="0"></use><use href="#MJMATHI-79" x="4798" y="0"></use><use href="#MJMAIN-29" x="5295" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mo>∑</mo><msup><mi>y</mi><mo>′</mo></msup><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-23">-\sum y'\log(y)</script>:</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">cross_entropy </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">reduce_mean</span><span class="pun">(-</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">reduce_sum</span><span class="pun">(</span><span class="pln">y_ </span><span class="pun">*</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">y</span><span class="pun">),</span><span class="pln"> reduction_indices</span><span class="pun">=[</span><span class="lit">1</span><span class="pun">]))</span><span class="pln"><br></span></code></pre>
+
+<p>First, <code>tf.log</code> computes the logarithm of each element of <code>y</code>. Next, we multiply
+each element of <code>y_</code> with the corresponding element of <code>tf.log(y)</code>. Then
+<code>tf.reduce_sum</code> adds the elements in the second dimension of y, due to the
+<code>reduction_indices=[1]</code> parameter. Finally, <code>tf.reduce_mean</code> computes the mean
+over all the examples in the batch.</p>
+<p>Note that in the source code, we don't use this formulation, because it is
+numerically unstable.  Instead, we apply
+<code>tf.nn.softmax_cross_entropy_with_logits</code> on the unnormalized logits (e.g., we
+call <code>softmax_cross_entropy_with_logits</code> on <code>tf.matmul(x, W) + b</code>), because this
+more numerically stable function internally computes the softmax activation.  In
+your code, consider using <code>tf.nn.softmax_cross_entropy_with_logits</code>
+instead.</p>
+<p>Now that we know what we want our model to do, it's very easy to have TensorFlow
+train it to do so.  Because TensorFlow knows the entire graph of your
+computations, it can automatically use the
+<a href="http://colah.github.io/posts/2015-08-Backprop/">backpropagation algorithm</a> to
+efficiently determine how your variables affect the loss you ask it to
+minimize. Then it can apply your choice of optimization algorithm to modify the
+variables and reduce the loss.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">train_step </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">train</span><span class="pun">.</span><span class="typ">GradientDescentOptimizer</span><span class="pun">(</span><span class="lit">0.05</span><span class="pun">).</span><span class="pln">minimize</span><span class="pun">(</span><span class="pln">cross_entropy</span><span class="pun">)</span><span class="pln"><br></span></code></pre>
+
+<p>In this case, we ask TensorFlow to minimize <code>cross_entropy</code> using the
+<a href="https://en.wikipedia.org/wiki/Gradient_descent">gradient descent algorithm</a>
+with a learning rate of 0.5. Gradient descent is a simple procedure, where
+TensorFlow simply shifts each variable a little bit in the direction that
+reduces the cost. But TensorFlow also provides
+<a href="https://www.tensorflow.org/api_guides/python/train#Optimizers">many other optimization algorithms</a>:
+using one is as simple as tweaking one line.</p>
+<p>What TensorFlow actually does here, behind the scenes, is to add new operations
+to your graph which implement backpropagation and gradient descent. Then it
+gives you back a single operation which, when run, does a step of gradient
+descent training, slightly tweaking your variables to reduce the loss.</p>
+<p>We can now launch the model in an <code>InteractiveSession</code>:</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">sess </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">InteractiveSession</span><span class="pun">()</span><span class="pln"><br></span></code></pre>
+
+<p>We first have to create an operation to initialize the variables we created:</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">tf</span><span class="pun">.</span><span class="pln">global_variables_initializer</span><span class="pun">().</span><span class="pln">run</span><span class="pun">()</span><span class="pln"><br></span></code></pre>
+
+<p>Let's train -- we'll run the training step 1000 times!</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="kwd">for</span><span class="pln"> _ </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">1000</span><span class="pun">):</span><span class="pln"><br>&nbsp; batch_xs</span><span class="pun">,</span><span class="pln"> batch_ys </span><span class="pun">=</span><span class="pln"> mnist</span><span class="pun">.</span><span class="pln">train</span><span class="pun">.</span><span class="pln">next_batch</span><span class="pun">(</span><span class="lit">100</span><span class="pun">)</span><span class="pln"><br>&nbsp; sess</span><span class="pun">.</span><span class="pln">run</span><span class="pun">(</span><span class="pln">train_step</span><span class="pun">,</span><span class="pln"> feed_dict</span><span class="pun">={</span><span class="pln">x</span><span class="pun">:</span><span class="pln"> batch_xs</span><span class="pun">,</span><span class="pln"> y_</span><span class="pun">:</span><span class="pln"> batch_ys</span><span class="pun">})</span><span class="pln"><br></span></code></pre>
+
+<p>Each step of the loop, we get a "batch" of one hundred random data points from
+our training set. We run <code>train_step</code> feeding in the batches data to replace
+the <code>placeholder</code>s.</p>
+<p>Using small batches of random data is called stochastic training -- in this
+case, stochastic gradient descent. Ideally, we'd like to use all our data for
+every step of training because that would give us a better sense of what we
+should be doing, but that's expensive. So, instead, we use a different subset
+every time. Doing this is cheap and has much of the same benefit.</p>
+<h2 id="evaluating_our_model"><a href="https://www.tensorflow.org/get_started/mnist/beginners#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Evaluating Our Model</h2>
+<p>How well does our model do?</p>
+<p>Well, first let's figure out where we predicted the correct label. <code>tf.argmax</code>
+is an extremely useful function which gives you the index of the highest entry
+in a tensor along some axis. For example, <code>tf.argmax(y,1)</code> is the label our
+model thinks is most likely for each input, while <code>tf.argmax(y_,1)</code> is the
+correct label. We can use <code>tf.equal</code> to check if our prediction matches the
+truth.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">correct_prediction </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">equal</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">argmax</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="lit">1</span><span class="pun">),</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">argmax</span><span class="pun">(</span><span class="pln">y_</span><span class="pun">,</span><span class="lit">1</span><span class="pun">))</span><span class="pln"><br></span></code></pre>
+
+<p>That gives us a list of booleans. To determine what fraction are correct, we
+cast to floating point numbers and then take the mean. For example,
+<code>[True, False, True, True]</code> would become <code>[1,0,1,1]</code> which would become <code>0.75</code>.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="pln">accuracy </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">reduce_mean</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">cast</span><span class="pun">(</span><span class="pln">correct_prediction</span><span class="pun">,</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">float32</span><span class="pun">))</span><span class="pln"><br></span></code></pre>
+
+<p>Finally, we ask for our accuracy on our test data.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="浅色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><code><span class="kwd">print</span><span class="pun">(</span><span class="pln">sess</span><span class="pun">.</span><span class="pln">run</span><span class="pun">(</span><span class="pln">accuracy</span><span class="pun">,</span><span class="pln"> feed_dict</span><span class="pun">={</span><span class="pln">x</span><span class="pun">:</span><span class="pln"> mnist</span><span class="pun">.</span><span class="pln">test</span><span class="pun">.</span><span class="pln">images</span><span class="pun">,</span><span class="pln"> y_</span><span class="pun">:</span><span class="pln"> mnist</span><span class="pun">.</span><span class="pln">test</span><span class="pun">.</span><span class="pln">labels</span><span class="pun">}))</span><span class="pln"><br></span></code></pre>
+
+<p>This should be about 92%.</p>
+<p>Is that good? Well, not really. In fact, it's pretty bad. This is because we're
+using a very simple model. With some small changes, we can get to 97%. The best
+models can get to over 99.7% accuracy! (For more information, have a look at
+this
+<a href="http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html">list of results</a>.)</p>
+<p>What matters is that we learned from this model. Still, if you're feeling a bit
+down about these results, check out
+<a href="https://www.tensorflow.org/get_started/mnist/pros">the next tutorial</a> where we do a lot
+better, and learn how to build more sophisticated models using TensorFlow!</p>
+
+  </div>
+  
+
+  
+        
+  
+
+
+
+
+
+
+
+        
+<div class="devsite-content-footer nocontent">
+  
+  
+    <p>Except as otherwise noted, the content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see our <a href="https://developers.google.com/terms/site-policies">Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+  
+
+  
+    
+    <p class="devsite-content-footer-date" itemprop="datePublished" content="2017-06-19T04:53:06.444070">
+      
+      上次更新日期：六月 19, 2017
+    </p>
+  
+
+</div>
+
+        </article>
+      </article>
+  
+
+        </div>
+      
+
+<footer class="devsite-footer-linkboxes nocontent
+               devsite-footer-linkboxes-all-backup
+               "><nav class="devsite-full-site-width"><ul class="devsite-footer-linkboxes-list"><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">把握动态</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://research.googleblog.com/search/label/TensorFlow" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Blog Link">
+                博客
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://github.com/tensorflow/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer GitHub Link">
+                GitHub
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://twitter.com/tensorflow" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Twitter Link">
+                Twitter
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">支持</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://github.com/tensorflow/tensorflow/issues" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Issue Tracker Link">
+                问题跟踪器
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://github.com/tensorflow/tensorflow/blob/master/RELEASE.md" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Release Notes Link">
+                版本说明
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://stackoverflow.com/questions/tagged/tensorflow" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Stack Overflow Link">
+                Stack Overflow
+            </a></li></ul></li></ul></nav></footer><footer class="devsite-utility-footer"><nav class="devsite-utility-footer-nav devsite-nav devsite-full-site-width"><div class="devsite-utility-footer-nav-left"><form class="devsite-utility-footer-language" action="https://www.tensorflow.org/i18n/setlang/" method="post"><input type="hidden" name="xsrf_token" value="W4t2nOqgUNE3wc5HzVveyvaDPCFDa6OsP10oWBdTJAA6MTUwMDc5OTM0OTI5MDgxMA"><input type="hidden" name="next" value="/get_started/mnist/beginners"><select class="devsite-utility-footer-language-select kd-select" name="language" track-type="languageSelector" track-name="click" style="display: none;"><option value="en" track-type="languageSelector" track-name="changed" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </option><option value="zh-cn" selected="selected" track-type="languageSelector" track-name="changed" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </option></select><span class="kd-button kd-menubutton kd-select" track-type="languageSelector" track-name="click"><div class="label">
+            简体中文
+          </div><div class="kd-disclosureindicator"></div></span></form><span class="devsite-utility-footer-links"><a class="devsite-utility-footer-link gc-analytics-event" href="https://www.google.com/policies/terms/" data-category="Site-Wide Custom Events" data-label="Footer terms link">条款
+         </a><a class="devsite-utility-footer-link gc-analytics-event" href="https://www.google.com/policies/privacy/" data-category="Site-Wide Custom Events" data-label="Footer privacy link">隐私权
+         </a></span></div></nav></footer></div><script async="" defer="" src="./MNIST For ML Beginners  _  TensorFlow_files/api.js.下载"></script><script src="./MNIST For ML Beginners  _  TensorFlow_files/jquery_ui-bundle.js.下载"></script><script src="./MNIST For ML Beginners  _  TensorFlow_files/saved_resource"></script><script src="./MNIST For ML Beginners  _  TensorFlow_files/script_foot_closure__zh_cn.js.下载"></script><script src="./MNIST For ML Beginners  _  TensorFlow_files/script_foot.js.下载"></script><script>
+        (function($) {
+          
+          devsite.devsite.Init($, {'FULL_SITE_SEARCH_ENABLED': 1, 'ENABLE_BLOCKED_VIDEO_PLACEHOLDER': 0, 'VERSION_HASH': 'c2b0e4ea66', 'SITE_NAME': 'tensorflow', 'HISTORY_ENABLED': 0, 'SUBPATH': '', 'ENABLE_BLOCKED_LINK_TOOLTIP': 0, 'ALLOWED_HOSTS': ['.android.com', '.api.ai', '.apigee.com', '.appspot.com', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.nest.com', '.openthread.io', '.tensorflow.org'], 'BLOCK_RSS_FEEDS': 0, 'SCRIPTSAFE_DOMAIN': 'tensorflow-dot-google-developers.appspot.com'},
+                               '[]','zh-cn',
+                               true, '',
+                               {"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true}, '/',
+                               'https://www.tensorflow.org/');
+        })(jQuery);
+
+        
+        devsite.localInit = function() {
+          
+        };
+
+      </script><script>
+      $('.devsite-utility-footer-language-select').each(function() {
+        $(this).change(function(){$('.devsite-utility-footer-language').submit();});
+      });
+      </script></div><span id="devsite-request-elapsed" data-request-elapsed="318.160057068"></span>
+<ul class="kd-menulist devsite-hidden"><li class="kd-menulistitem" value="en" track-type="languageSelector" track-name="changed" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </li><li class="kd-menulistitem devsite-selected-option" value="zh-cn" track-type="languageSelector" track-name="changed" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </li></ul></body></html>
