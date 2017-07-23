@@ -32,5 +32,11 @@ correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 print(sess.run(accuracy, feed_dict={x:mnist.test.images, y_:mnist.test.labels}))
+# 结束验证
 
-
+'''
+建立的是一个线性模型，就是一阶方程；
+训练的目标是将平方和最小化，即 cross_entropy 最小
+从目标数据中每次取100条记录，进行训练
+验证是将模型的输出与正确的结果作对比
+'''
