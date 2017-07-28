@@ -21,7 +21,7 @@ public class AccountAction extends AbstractAction
 	private static final long serialVersionUID = 5601982197489875967L;
 	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
 	@Resource
-	protected AccountImpl accountImpl = new AccountImpl(); // TODO
+	protected AccountImpl accountImpl = new AccountImpl();
 
 	private String username;
 	private String password;
