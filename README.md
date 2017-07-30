@@ -11,5 +11,11 @@ mnist 可以用很简单的一阶方程进行训练，
 
 一个讲解卷积讲得比较好的[视频](https://www.youtube.com/watch?v=FmpDIaiMIeA)，作者email: brohrer###microsoft.com
 
+### 图像计算的基本过程：
+convolution->ReLU->Pooling
+
+> relu: 将负值置为0
+> pooling: 即中文的池化，按2X2选择最大值。pooling 不关心特征在图像中的位置
+
 
 mechine learning 系列视频 https://www.youtube.com/watch?v=ICKBWIkfeJ8&list=PLAwxTw4SYaPkQXg8TkVdIvYv4HfLG7SiH&spfreload=5

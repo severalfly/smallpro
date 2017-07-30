@@ -59,21 +59,35 @@ def max_pool_2x2(x):
 
 
 # 第一层卷积
+# 现在我们可以开始实现第一层了。它由一个卷积接一个max pooling 完成。
+# 卷积在每个5*5的patch中算出32个特征。卷积的权重张量是`[5,5,1,32]`，
+# 前面两个维度是patch的大小，接着是输入的通道数目，最后输出的通道数目。
+# 而对于每一个输出通道都有一个对应的偏置量。
 W_conv1 = weight_variable([5,5,1,32])
 b_conv1 = bias_variable([32])
 
+# 为了用这一层，我们把x 变成一个4d向量，其第2、第3维对应图片的宽、高，
+# 最后一维代表图片的颜色通道数
 x_image = tf.reshape(x, [-1, 28,28, 1])
 
+# 我们把x_image 和权值向量进行卷积，加上偏置项，然后应用ReLu激活函数，最后进行max pooling
 h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
 h_pool1 = max_pool_2x2(h_conv1)
 
 
+
+# 第二层卷积
+# 为了构建一个更深的网络，我们会把几个类似的层堆叠起来。
+# 第二层，每个5X5的batch 会得到64个特征
 W_conv2 = weight_variable([5,5,32, 64])
 b_conv2 = bias_variable([64])
 
 h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
 h_pool2 = max_pool_2x2(h_conv2)
 
+
+
+# 密集连接层
 W_fc1 = weight_variable([7 * 7 * 64, 1024])
 b_fc1 = bias_variable([1024])
 
@@ -87,7 +101,7 @@ h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
 W_fc2 = weight_variable([1024, 10])
 b_fc2 = bias_variable([10])
 
-y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
+y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
 
 
 # 训练和评估模型
