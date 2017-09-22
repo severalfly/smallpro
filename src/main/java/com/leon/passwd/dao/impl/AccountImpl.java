@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.leon.order12306.util.DBUtils;
+import com.leon.order12306.util.ObjectUtil;
 import com.leon.passwd.bean.Account;
 import com.leon.passwd.bean.PasswdRecord;
-import com.leon.passwd.util.DBUtils;
-import com.leon.passwd.util.ObjectUtil;
 
 @Component("accountImpl")
 public class AccountImpl
