@@ -3,6 +3,7 @@ package com.leon.order12306.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -11,6 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.junit.Test;
 
 public class Order12306
 {
@@ -49,7 +51,7 @@ public class Order12306
 			//				result += line;
 			//			}
 			//			System.out.println(result);
-			
+
 			HttpGet get = new HttpGet("https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand&0.8946813635463624");
 			//创建HttpClientBuilder  
 			//			HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
@@ -113,6 +115,34 @@ public class Order12306
 			{
 				ex.printStackTrace();
 			}
+		}
+	}
+
+	@Test
+	public void queryPayid()
+	{
+		//		String time = ObjectUtil.getString(new Timestamp(System.currentTimeMillis()));
+		//		System.out.println(time.substring(11, 16));
+		//		GtgjCouponConfig gcc = GtgjCouponConfigCache.instance.getGtgjCouponConfigById("7731bfe1545546ab8a6d29f8f763ef8f");
+		//		Pair<Res, List<com.huoli.gtgj.common.bean.coupon.ReturnCashCoupon>> pair = CommonActivityPro.sendGtgjCouponV3(null, gcc, accountGtgj, accountGtgj.getUid(), accountGtgj.getP(), 2);
+		//		logger.info("发三个帐号已提交的，" + phone + " " + com.alibaba.fastjson.JSONObject.toJSONString(pair));
+		// TODO Auto-generated method stub
+		try
+		{
+			//			System.out.println(InetAddress.getLocalHost().getHostAddress());
+			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_CEILING));
+			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_DOWN));
+			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_FLOOR));
+			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_HALF_DOWN));
+			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_HALF_EVEN));
+			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_HALF_UP));
+			//			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_UNNECESSARY));
+			System.out.println(new BigDecimal("51.5").divide(new BigDecimal(20), BigDecimal.ROUND_UP));
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
