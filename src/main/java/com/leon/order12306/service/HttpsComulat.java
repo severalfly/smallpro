@@ -2,6 +2,7 @@ package com.leon.order12306.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
@@ -9,6 +10,8 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
+
+import com.alibaba.fastjson.JSONObject;
 
 public class HttpsComulat
 {
@@ -59,15 +62,22 @@ public class HttpsComulat
 		myURL = new URL("https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand&0.3739600564209904");
 		httpsConn = (HttpsURLConnection) myURL.openConnection();
 		httpsConn.setSSLSocketFactory(ssf);
-		insr = new InputStreamReader(httpsConn.getInputStream());
-		respInt = insr.read();
-		FileOutputStream out = new FileOutputStream(new File("d:\\test.png"));
-		while (respInt != -1)
+		InputStream in = httpsConn.getInputStream();
+		System.out.println(JSONObject.toJSONString(httpsConn));
+		byte[] buff = new byte[1024];
+		int c = 0;
+		FileOutputStream out = new FileOutputStream(new File("d:\\tmp\\test.png"));
+		while ((c = in.read(buff, 0, 1024)) > 0)
 		{
-			out.write((char) respInt);
-			//			System.out.print((char) respInt);
-			respInt = insr.read();
+			out.write(buff, 0, c);
 		}
+		//		respInt = insr.read();
+		//		while (respInt != -1)
+		//		{
+		//			out.write((char) respInt);
+		//			System.out.print((char) respInt);
+		//			respInt = insr.read();
+		//		}
 		out.close();
 	}
 }
