@@ -1,13 +1,11 @@
 package com.leon.kafkat;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-
-import com.alibaba.fastjson.JSONObject;
 
 public class KafkaConsumeTTT
 {
@@ -35,6 +33,7 @@ public class KafkaConsumeTTT
 	 */
 	public void getMsg() throws Exception
 	{
+		BigDecimal b = new BigDecimal("0");
 		//		ConsumerConfig config = new ConsumerConfig(properties);
 
 		KafkaConsumer<String, String> consumer = new KafkaConsumer(properties);
@@ -47,8 +46,8 @@ public class KafkaConsumeTTT
 		//
 		//		StringDecoder valueDecoder = new StringDecoder(new VerifiableProperties());
 
-		Map<String, ConsumerRecords<String, String>> records = consumer.poll(10000);
-		System.out.println(JSONObject.toJSONString(records));
+		//		Map<String, ConsumerRecords<String, String>> records = consumer.poll(10000);
+		//		System.out.println(JSONObject.toJSONString(records));
 		consumer.close();
 		//		Map<String, List<KafkaStream<String, String>>> consumerMap = consumer.createMessageStreams(topicCountMap, keyDecoder, valueDecoder);
 		//

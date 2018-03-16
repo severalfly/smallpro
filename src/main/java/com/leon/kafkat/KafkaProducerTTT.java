@@ -14,21 +14,22 @@ import com.alibaba.fastjson.JSONObject;
 public class KafkaProducerTTT
 {
 	private final Producer<String, String> producer;
-	public final static String TOPIC = "my-replicated-topic";
+	public final static String TOPIC = "test";
 
 	private KafkaProducerTTT()
 	{
 		Properties props = new Properties();
 		//此处配置的是kafka的端口
 		//		props.put("metadata.broker.list", "localhost:9092");
-		props.put("broker.list", "192.168.102.45:9092,192.168.102.45:9093,192.168.102.45:9094");
+		String ips = "localhost:9092";
+		props.put("broker.list", ips);
 
 		//配置value的序列化类
 		//		props.put("serializer.class", "kafka.serializer.StringEncoder");
 		//配置key的序列化类
 		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		props.put("bootstrap.servers", "192.168.102.45:9092,192.168.102.45:9093,192.168.102.45:9094");
+		props.put("bootstrap.servers", ips);
 		//		props.put("serializer.class", "kafka.serializer.StringEncoder");
 
 		//request.required.acks
@@ -37,7 +38,7 @@ public class KafkaProducerTTT
 		//-1, which means that the producer gets an acknowledgement after all in-sync replicas have received the data. This option provides the best durability, we guarantee that no messages will be lost as long as at least one in sync replica remains.
 		props.put("request.required.acks", "-1");
 
-		producer = new KafkaProducer(props);
+		producer = new KafkaProducer<String, String>(props);
 		//		producer.
 		//		ProducerConfig i = new ProducerConfig
 		//		producer = new Producer<String, String>();
