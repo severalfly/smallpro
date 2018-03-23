@@ -1,66 +1,61 @@
 package com.leon.kafkat;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
+
 public class KafkaConsumeTTT
 {
-	private final static String TOPIC = "test-topic";
+	private final static String TOPIC = "test";
 
-	private static Properties properties;
+	private KafkaConsumer<String, String> consumer;
 
-	static
+	private KafkaConsumeTTT()
 	{
-		properties = new Properties();
+		Properties props = new Properties();
+        //zookeeper 配置
+		props.put("zookeeper.connect", "localhost:2181");
 
-		properties.put("zookeeper.connect", "localhost:2181");
-		properties.put("group.id", "lijiegroup");
-		properties.put("zookeeper.session.timeout.ms", "4000");
-		properties.put("zookeeper.sync.time.ms", "200");
-		properties.put("auto.commit.interval.ms", "1000");
-		properties.put("auto.offset.reset", "smallest");
-		properties.put("serializer.class", "org.apache.kafka.common.serialization.StringSerializer");
+        //group 代表一个消费组
+        props.put("group.id", "jd-group");
+
+        //zk连接超时
+        props.put("zookeeper.session.timeout.ms", "4000");
+        props.put("zookeeper.sync.time.ms", "200");
+        props.put("auto.commit.interval.ms", "1000");
+        props.put("auto.offset.reset", "smallest");
+        //序列化类
+        props.put("serializer.class", "kafka.serializer.StringEncoder");
+
+		//		Map<?, ?> props1 = new HashMap<String, String>();
+		//		ConsumerConfig config = new ConsumerConfig(props1);
+
+		consumer = new KafkaConsumer<String, String>(props);
+    }
+
+	void consume()
+	{
+		//		Map<String, Integer> topicCount = new HashMap<String, Integer>();
+		//		topicCount.put(TOPIC, new Integer(1));
+		//
+		//		Map<String, Integer> topicMap = new HashMap<String, Integer>();
+		//		// 1 represents the single thread  
+		//		topicCount.put(TOPIC, new Integer(1));
+		//		Map<String, List<KafkaLZ4BlockInputStream>> consumerStreamsMap = consumer.;//createMessageStreams(topicMap);
+		//		// Get the list of message streams for each topic, using the default decoder.  
+		//		List<KafkaStream<byte[], byte[]>> streamList = consumerStreamsMap.get(topic);
+		//		for (final KafkaStream<byte[], byte[]> stream : streamList)
+		//		{
+		//			ConsumerIterator<byte[], byte[]> consumerIte = stream.iterator();
+		//			while (consumerIte.hasNext())
+		//				System.out.println("Message from Single Topic :: " + new String(consumerIte.next().message()));
+		//		}
 	}
 
-	/**
-	 * 获取消息
-	 * 
-	 * @throws Exception
-	 */
-	public void getMsg() throws Exception
+	public static void main(String[] args)
 	{
-		BigDecimal b = new BigDecimal("0");
-		//		ConsumerConfig config = new ConsumerConfig(properties);
-
-		KafkaConsumer<String, String> consumer = new KafkaConsumer(properties);
-
-		Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
-
-		topicCountMap.put(TOPIC, new Integer(1));
-
-		//		StringDecoder keyDecoder = new StringDecoder(new VerifiableProperties());
-		//
-		//		StringDecoder valueDecoder = new StringDecoder(new VerifiableProperties());
-
-		//		Map<String, ConsumerRecords<String, String>> records = consumer.poll(10000);
-		//		System.out.println(JSONObject.toJSONString(records));
-		consumer.close();
-		//		Map<String, List<KafkaStream<String, String>>> consumerMap = consumer.createMessageStreams(topicCountMap, keyDecoder, valueDecoder);
-		//
-		//		KafkaStream<String, String> stream = consumerMap.get(TOPIC).get(0);
-		//
-		//		ConsumerIterator<String, String> it = stream.iterator();
-		//
-		//		while (it.hasNext())
-		//		{
-		//			String json = it.next().message();
-		//			User user = (User) JsonUtils.JsonToObj(json, User.class);
-		//			System.out.println(user);
-		//		}
+		//		new KafkaConsumer().consume();
 	}
 
 }
