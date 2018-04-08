@@ -20,24 +20,8 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.2.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient-cache -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient-cache</artifactId>
-			<version>4.2.1</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpmime</artifactId>
-			<version>4.2.1</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore-nio -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore-nio</artifactId>
-			<version>4.2.1</version>
-		</dependency>
+	
+
 		<!-- https://mvnrepository.com/artifact/com.chargebee/chargebee-java -->
 		<dependency>
 			<groupId>com.chargebee</groupId>
@@ -95,4 +79,9 @@
 	<build>
 		<finalName>smallpro</finalName>
 	</build>
+	<properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+
 </project>
