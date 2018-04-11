@@ -28,7 +28,7 @@ public class MyConsumer
 		originalProps.put("zookeeper.connect", "localhost:2181");
 
 		//group 代表一个消费组
-		originalProps.put("group.id", "hashleaf-group");
+		originalProps.put("group.id", "hashleaf-group-test");
 
 		//zk连接超时时间
 		originalProps.put("zookeeper.session.timeout.ms", "10000");
@@ -61,9 +61,10 @@ public class MyConsumer
 
 		ExecutorService executor = Executors.newFixedThreadPool(4);
 
+		int i = 0;
 		while (true)
 		{
-			System.out.println("start to get data from kafka...");
+			System.out.println("start to get data from kafka... " + ++i);
 			//根据指定的topic 获取 stream 集合
 			List<KafkaStream<String, String>> kafkaStreams = map.get(KafkaProducerTTT.TOPIC);
 			//因为是多个 message组成 message set ， 所以要对stream 进行拆解遍历

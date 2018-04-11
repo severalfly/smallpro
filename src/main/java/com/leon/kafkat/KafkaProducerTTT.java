@@ -21,7 +21,7 @@ public class KafkaProducerTTT
 		Properties props = new Properties();
 		//此处配置的是kafka的端口
 		//		props.put("metadata.broker.list", "localhost:9092");
-		String ips = "localhost:9092";
+		String ips = "localhost:9092,localhost:9093,localhost:9094";
 		props.put("broker.list", ips);
 
 		//配置value的序列化类
@@ -52,7 +52,7 @@ public class KafkaProducerTTT
 		while (messageNo < COUNT)
 		{
 			String key = String.valueOf(messageNo);
-			String data = new Date() + " hello kafka message " + key;
+			String data = new Date() + " hello kafka message " + key + "   " + new Date();
 			ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, data);
 			Future<RecordMetadata> i = producer.send(record);
 			System.out.println(JSONObject.toJSONString(i));
