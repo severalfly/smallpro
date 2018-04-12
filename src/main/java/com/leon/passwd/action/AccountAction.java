@@ -1,10 +1,10 @@
 package com.leon.passwd.action;
 
-import java.util.Date;
-
 import org.apache.struts2.convention.annotation.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.leon.passwd.schedule.GrabLeon;
 
 public class AccountAction extends AbstractAction
 {
@@ -14,7 +14,7 @@ public class AccountAction extends AbstractAction
 	@Action(value = "testv2")
 	public void testv2()
 	{
-		logger.info("testv2 " + new Date());
-		System.out.println("testv2 " + new Date());
+		logger.info("testV2 start");
+		new GrabLeon().start();
 	}
 }
