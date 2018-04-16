@@ -1,6 +1,7 @@
 package com.leon.passwd.schedule;
 
 import java.util.Date;
+import java.util.Random;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,7 +24,7 @@ public class GrabLeon extends Thread {
 			// 当前失败次数，超过5次时，就可以退出了
 			int errCnt = 0;
 			int failCnt = 0;
-			int count = 500;
+			int count = 1000;
 			int limit = count * 2 / 100; // 配置失败率后退出，
 			for (int i = 0; i < count; i++) {
 
@@ -46,9 +47,10 @@ public class GrabLeon extends Thread {
 					logger.info(new Date() + " 当前已失败 errCnt: {}  failCnt: {} 退出抓取任务, 总执行: " + i, errCnt, failCnt);
 					break;
 				}
-				Thread.sleep(8 * 10);
+				// Thread.sleep(5 * 10);
 				if (i % 10 == 0) {
-					Thread.sleep(22 * 100);
+					int rn = new Random().nextInt(30);
+					Thread.sleep(rn * 100);
 				}
 			}
 			logger.info(new Date() + " 当前 " + count + " 已完成 errCnt: {}  failCnt: {} 退出抓取任务", errCnt, failCnt);
@@ -63,7 +65,7 @@ public class GrabLeon extends Thread {
 		try {
 			String departCode = "WHN";
 			String arriveCode = "BJP";
-			String departDate = "2018-04-30";
+			String departDate = "2018-04-14";
 			// String url =
 			// "https://kyfw.12306.cn/otn/leftTicket/queryA?leftTicketDTO.train_date=%s&leftTicketDTO.from_station=%s&leftTicketDTO.to_station=%s&purpose_codes=ADULT";
 			String url = "https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date=%s&leftTicketDTO.from_station=%s&leftTicketDTO.to_station=%s&purpose_codes=ADULT";
@@ -87,7 +89,10 @@ public class GrabLeon extends Thread {
 				logger.info("获取到结果全部结果 {}", JSONObject.toJSONString(response));
 			String sEntity = EntityUtils.toString(entity);
 			if (logFlag || !sEntity.startsWith("{"))
-				logger.info("获取到结果entity结果 {}", sEntity);
+			{
+				String s = new String(sEntity.getBytes("utf-8"));
+				logger.info("获取到结果entity结果 {}", s);
+			}
 			// System.out.println(JSONObject.toJSONString(response));
 			if (sEntity.startsWith("{")) {
 				JSONObject json = JSONObject.parseObject(sEntity);
