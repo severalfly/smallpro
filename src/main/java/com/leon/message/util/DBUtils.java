@@ -1,4 +1,4 @@
-package com.leon.passwd.util;
+package com.leon.message.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

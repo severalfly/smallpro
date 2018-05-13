@@ -1,4 +1,4 @@
-package com.leon.passwd.bean;
+package com.leon.message.bean;
 
 public class Account
 {

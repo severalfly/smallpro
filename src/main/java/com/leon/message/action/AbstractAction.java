@@ -1,4 +1,4 @@
-package com.leon.passwd.action;
+package com.leon.message.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
