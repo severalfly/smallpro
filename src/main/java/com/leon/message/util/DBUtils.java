@@ -18,7 +18,7 @@ public class DBUtils
 	{
 		try
 		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Class.forName("com.mysql.cj.jdbc.Driver");
 		}
 		catch (Exception e)
 		{
@@ -34,9 +34,9 @@ public class DBUtils
 	{
 		try
 		{
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false", "root", "passwd");//将数据库名字修改为自己的数据库，root 为账户名
+//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false", "root", "passwd");//将数据库名字修改为自己的数据库，root 为账户名
 		}
-		catch (SQLException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -53,23 +53,23 @@ public class DBUtils
 	{
 		try
 		{
-			if (resultSet != null)
-			{
-				resultSet.close();
-				resultSet = null;
-			}
-
-			if (preparedStatement != null)
-			{
-				preparedStatement.close();
-				preparedStatement = null;
-			}
-
-			if (connection != null)
-			{
-				connection.close();
-				connection = null;
-			}
+//			if (resultSet != null)
+//			{
+//				resultSet.close();
+//				resultSet = null;
+//			}
+//
+//			if (preparedStatement != null)
+//			{
+//				preparedStatement.close();
+//				preparedStatement = null;
+//			}
+//
+//			if (connection != null)
+//			{
+//				connection.close();
+//				connection = null;
+//			}
 		}
 		catch (Exception e)
 		{
@@ -88,24 +88,24 @@ public class DBUtils
 		ArrayList<Object[]> list = new ArrayList<Object[]>();
 		try
 		{
-			connection = getConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			for (int i = 0; i < parameters.length; i++)
-			{
-				preparedStatement.setString(i + 1, parameters[i]);
-			}
-			resultSet = preparedStatement.executeQuery();
-			int columnCount = resultSet.getMetaData().getColumnCount();
-
-			while (resultSet.next())
-			{
-				Object[] objects = new Object[columnCount];
-				for (int i = 0; i < columnCount; i++)
-				{
-					objects[i] = resultSet.getObject(i + 1);
-				}
-				list.add(objects);
-			}
+//			connection = getConnection();
+//			preparedStatement = connection.prepareStatement(sql);
+//			for (int i = 0; i < parameters.length; i++)
+//			{
+//				preparedStatement.setString(i + 1, parameters[i]);
+//			}
+//			resultSet = preparedStatement.executeQuery();
+//			int columnCount = resultSet.getMetaData().getColumnCount();
+//
+//			while (resultSet.next())
+//			{
+//				Object[] objects = new Object[columnCount];
+//				for (int i = 0; i < columnCount; i++)
+//				{
+//					objects[i] = resultSet.getObject(i + 1);
+//				}
+//				list.add(objects);
+//			}
 		}
 		catch (Exception e)
 		{
@@ -113,7 +113,7 @@ public class DBUtils
 		}
 		finally
 		{
-			close(connection, preparedStatement, resultSet);
+//			close(connection, preparedStatement, resultSet);
 		}
 		return list;
 	}
@@ -127,26 +127,26 @@ public class DBUtils
 	{
 		try
 		{
-			connection = getConnection();
-			connection.setAutoCommit(false);
-			for (int i = 0; i < sqls.length; i++)
-			{
-				preparedStatement = connection.prepareStatement(sqls[i]);
-				for (int j = 0; j < parameters[i].length; j++)
-				{
-					preparedStatement.setString(j + 1, parameters[i][j]);
-				}
-				preparedStatement.executeUpdate();
-			}
-			connection.commit();
+//			connection = getConnection();
+//			connection.setAutoCommit(false);
+//			for (int i = 0; i < sqls.length; i++)
+//			{
+//				preparedStatement = connection.prepareStatement(sqls[i]);
+//				for (int j = 0; j < parameters[i].length; j++)
+//				{
+//					preparedStatement.setString(j + 1, parameters[i][j]);
+//				}
+//				preparedStatement.executeUpdate();
+//			}
+//			connection.commit();
 		}
 		catch (Exception e)
 		{
 			try
 			{
-				connection.rollback();
+//				connection.rollback();
 			}
-			catch (SQLException e1)
+			catch (Exception e1)
 			{
 				e1.printStackTrace();
 			}
@@ -154,7 +154,7 @@ public class DBUtils
 		}
 		finally
 		{
-			close(connection, preparedStatement, resultSet);
+//			close(connection, preparedStatement, resultSet);
 		}
 	}
 }
