@@ -15,6 +15,7 @@ public class KafkaProducerTTT
 {
 	private final Producer<String, String> producer;
 	public final static String TOPIC = "test";
+	public final static String TOPIC_TRIP_EVENT = "trip-event";
 
 	private KafkaProducerTTT()
 	{
