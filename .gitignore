@@ -11,5 +11,10 @@ buildNumber.properties
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 *.iml
-.idea/
+/bin/
+.classpath
+.project
+**.prefs
 .settings/
+.idea/
+.DS_Store
