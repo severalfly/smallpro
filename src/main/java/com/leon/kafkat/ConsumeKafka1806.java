@@ -1,6 +1,5 @@
 package com.leon.kafkat;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -14,7 +13,7 @@ public class ConsumeKafka1806
 	//		private KafkaConsumer<String, String> consumer = null;
 	//	private KafkaConsumer consumer;
 
-	public void run()
+	public static void main(String[] args)
 	{
 		// 初始化
 
@@ -42,7 +41,7 @@ public class ConsumeKafka1806
 		}
 	}
 
-	private void ConsumeKafka1806()
+	private static void ConsumeKafka1806()
 	{
 		try
 		{
@@ -54,7 +53,7 @@ public class ConsumeKafka1806
 			while (true)
 			{
 				ConsumerRecords<String, String> records = consumer.poll(1);// 拉取一次数据
-				System.out.println(JSONObject.toJSONString(records));
+				//				System.out.println(JSONObject.toJSONString(records));
 				for (ConsumerRecord<String, String> record : records)
 				{
 					//					String data = String.format("kafka success offset = %d, key = %s, value = %s\n", +record.offset(), record.key(), record.value());
@@ -62,7 +61,7 @@ public class ConsumeKafka1806
 					System.out.println(data);
 				}
 
-				Thread.sleep(1000);
+				Thread.sleep(10);
 			}
 		}
 		catch (Throwable e)
@@ -71,7 +70,7 @@ public class ConsumeKafka1806
 		}
 	}
 
-	private KafkaConsumer<String, String> initConsume()
+	private static KafkaConsumer<String, String> initConsume()
 	{
 		Properties props = new Properties();
 		// 配置   这里是不需要配置zook 地址的，只需要配置节点就可以，支持逗号分隔的列表
@@ -96,7 +95,7 @@ public class ConsumeKafka1806
 
 		System.out.println("kafka config success 2 ...");
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
-		consumer.subscribe(Arrays.asList("test"));// 指定topic消费
+		consumer.subscribe(Arrays.asList("train-buried-point"));// 指定topic消费
 		return consumer;
 	}
 
