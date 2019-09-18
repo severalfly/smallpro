@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <!-- 日志文件存放目录 -->
+        <Property name="LOG_HOME">./logs</Property>
+        <Property name="CONSOLE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%l] %clr{%5p} |%clr{%X{X-B3-TraceId}}{magenta}| : %msg%xEx%n</Property>
+        <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%l] %5p |%X{X-B3-TraceId}| : %msg%xEx%n</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 控制台输出日志 -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}"/>
+        </Console>
+
+        <!-- Access日志 -->
+        <RollingFile name="Access" fileName="${LOG_HOME}/trainnet.log" filePattern="${LOG_HOME}/trainnet-%d{yyyy-MM-dd}.log.%i">
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="300" fileIndex="min"/>
+        </RollingFile>
+
+        <!-- Error日志 -->
+        <RollingFile name="Error" fileName="${LOG_HOME}/trainnet_error.log" filePattern="${LOG_HOME}/trainnet_error-%d{yyyy-MM-dd}.log.%i">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="300" fileIndex="min"/>
+        </RollingFile>
+
+        <!--        <Async name="AsyncFlume" bufferSize="32768" blocking="false" includeLocation="true"-->
+        <!--               error-ref="errorFlumeAppender">-->
+        <!--            <AppenderRef ref="FlumeAppender"/>-->
+        <!--        </Async>-->
+
+        <!--        <Flume name="FlumeAppender" compress="false" type="Avro" batchSize="500" maxDelayMillis="60">-->
+        <!--            <Agent host="221.235.53.167" port="8801"/>-->
+        <!--            <Agent host="221.235.53.167" port="8802"/>-->
+        <!--            <HuoliJsonLayout charset="UTF-8" dateFormat="yyyy-MM-dd HH:mm:ss.SSS" mode="simple" line="false">-->
+        <!--                <KeyValuePair key="traceId" value="#mdc:X-B3-TraceId"/>-->
+        <!--                <KeyValuePair key="spanId" value="#mdc:X-B3-SpanId"/>-->
+        <!--            </HuoliJsonLayout>-->
+        <!--        </Flume>-->
+
+        <!--        <Flume name="errorFlumeAppender" compress="false" type="Avro" batchSize="500" maxDelayMillis="60">-->
+        <!--            <Agent host="221.235.53.167" port="8801"/>-->
+        <!--            <Agent host="221.235.53.167" port="8802"/>-->
+        <!--            <HuoliJsonLayout charset="UTF-8" dateFormat="yyyy-MM-dd HH:mm:ss.SSS" mode="simple" line="false">-->
+        <!--                <KeyValuePair key="traceId" value="#mdc:X-B3-TraceId"/>-->
+        <!--                <KeyValuePair key="spanId" value="#mdc:X-B3-SpanId"/>-->
+        <!--            </HuoliJsonLayout>-->
+        <!--        </Flume>-->
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Access"/>
+            <AppenderRef ref="Error"/>
+        </Root>
+
+        <logger name="trace" level="INFO" additivity="false">
+            <!--            <appender-ref ref="AsyncFlume"/>-->
+        </logger>
+
+        <Logger name="org.apache.http.impl.client" additivity="false" level="ERROR">
+            <AppenderRef ref="Error"/>
+        </Logger>
+
+        <logger name="event" level="INFO" additivity="false">
+            <!--            <appender-ref ref="AsyncFlume"/>-->
+        </logger>
+    </Loggers>
+</Configuration>
