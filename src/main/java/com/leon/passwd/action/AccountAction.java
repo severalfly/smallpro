@@ -1,11 +1,12 @@
 package com.leon.passwd.action;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.util.Calendar;
 
 @Slf4j
 @RestController
@@ -15,10 +16,20 @@ public class AccountAction extends AbstractAction
 	//	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
 
 	@RequestMapping(value = "testv2")
-	public String testv2()
+	public String testv2() throws InterruptedException
 	{
-		log.info("testv2 " + new Date());
-		System.out.println("testv2 " + new Date());
+		JSONObject jsonObject = new JSONObject();
+
+		for (int i = 0; i < 100; i++)
+		{
+			jsonObject.put("res-key", i);
+			Calendar calendar = Calendar.getInstance();
+			jsonObject.put("res-time", new Timestamp(calendar.getTimeInMillis()).toString());
+			log.info(jsonObject.toJSONString());
+			//			log.info("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
+			//			System.out.println("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
+			Thread.sleep(500);
+		}
 		return "done";
 	}
 
