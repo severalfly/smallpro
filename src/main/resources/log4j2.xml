@@ -2,7 +2,7 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <!-- 日志文件存放目录 -->
-        <Property name="LOG_HOME">./logs</Property>
+        <Property name="LOG_HOME">../logs</Property>
         <Property name="CONSOLE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%l] %clr{%5p} |%clr{%X{X-B3-TraceId}}{magenta}| : %msg%xEx%n</Property>
         <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%l] %5p |%X{X-B3-TraceId}| : %msg%xEx%n</Property>
         <Property name="FILEBEAT_LOG_PATTERN">%msg%xEx%n</Property>

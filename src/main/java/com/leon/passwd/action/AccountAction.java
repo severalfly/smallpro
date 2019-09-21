@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Random;
 
 @Slf4j
 @RestController
@@ -16,13 +17,13 @@ public class AccountAction extends AbstractAction
 	//	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
 
 	@RequestMapping(value = "testv2")
-	public String testv2() throws InterruptedException
+	public String testv2(int count) throws InterruptedException
 	{
 		JSONObject jsonObject = new JSONObject();
 
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < count; i++)
 		{
-			jsonObject.put("res-key", i);
+			jsonObject.put("res-key", new Random().nextInt(100) % 2);
 			Calendar calendar = Calendar.getInstance();
 			jsonObject.put("res-time", new Timestamp(calendar.getTimeInMillis()).toString());
 			log.info(jsonObject.toJSONString());
@@ -30,7 +31,7 @@ public class AccountAction extends AbstractAction
 			//			System.out.println("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
 			Thread.sleep(500);
 		}
-		return "done";
+		return "done on " + count;
 	}
 
 	public static void main(String[] args) throws Exception
