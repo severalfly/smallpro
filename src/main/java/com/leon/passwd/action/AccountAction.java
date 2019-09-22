@@ -1,6 +1,7 @@
 package com.leon.passwd.action;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leon.passwd.util.ELKLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ public class AccountAction extends AbstractAction
 			Calendar calendar = Calendar.getInstance();
 			jsonObject.put("res-time", new Timestamp(calendar.getTimeInMillis()).toString());
 			log.info(jsonObject.toJSONString());
+			ELKLog.log(jsonObject, "test-random", "", new Timestamp(System.currentTimeMillis()));
 			//			log.info("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
 			//			System.out.println("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
 			Thread.sleep(500);

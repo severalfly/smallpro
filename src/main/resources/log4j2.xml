@@ -67,7 +67,7 @@
             <!--            <appender-ref ref="AsyncFlume"/>-->
         </logger>
 
-        <logger name="com.leon.passwd.action.AccountAction" level="INFO" additivity="false">
+        <logger name="com.leon.passwd.util.ELKLog" level="INFO" additivity="false">
             <appender-ref ref="Filebeat"/>
         </logger>
     </Loggers>
