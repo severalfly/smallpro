@@ -15,7 +15,7 @@
         </Console>
 
         <!-- Access日志 -->
-        <RollingFile name="Access" fileName="${LOG_HOME}/trainnet.log" filePattern="${LOG_HOME}/trainnet-%d{yyyy-MM-dd}.log.%i">
+        <RollingFile name="Access" fileName="${LOG_HOME}/leon.log" filePattern="${LOG_HOME}/leon-%d{yyyy-MM-dd}.log.%i">
             <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -25,7 +25,7 @@
         </RollingFile>
 
         <!-- filebeat日志 -->
-        <RollingFile name="Filebeat" fileName="${LOG_HOME}/trainnet_filebeat.log" filePattern="${LOG_HOME}/trainnet_filebeat-%d{yyyy-MM-dd}.log.%i">
+        <RollingFile name="Filebeat" fileName="${LOG_HOME}/leon_filebeat.log" filePattern="${LOG_HOME}/leon_filebeat-%d{yyyy-MM-dd}.log.%i">
             <PatternLayout pattern="${sys:FILEBEAT_LOG_PATTERN}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -35,7 +35,7 @@
         </RollingFile>
 
         <!-- Error日志 -->
-        <RollingFile name="Error" fileName="${LOG_HOME}/trainnet_error.log" filePattern="${LOG_HOME}/trainnet_error-%d{yyyy-MM-dd}.log.%i">
+        <RollingFile name="Error" fileName="${LOG_HOME}/leon_error.log" filePattern="${LOG_HOME}/leon_error-%d{yyyy-MM-dd}.log.%i">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
             <Policies>

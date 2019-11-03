@@ -29,7 +29,7 @@ public class ThreadUtil
 				try
 				{
 					// 队列已满，需要重试
-					Thread.sleep(1000L);
+					Thread.sleep(100L);
 				}
 				catch (InterruptedException e1)
 				{
