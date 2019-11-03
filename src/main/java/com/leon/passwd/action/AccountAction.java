@@ -38,10 +38,4 @@ public class AccountAction
 		return "done on " + count;
 	}
 
-	@Action(value = "testv2")
-	public void testv2()
-	{
-		logger.info("testv2 " + new Date());
-		System.out.println("testv2 " + new Date());
-	}
 }
