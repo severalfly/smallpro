@@ -12,26 +12,28 @@ import java.util.Random;
 
 @Slf4j
 @RestController
-public class AccountAction extends AbstractAction
+public class AccountAction
 {
 	private static final long serialVersionUID = 5601982197489875967L;
-	//	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
 
 	@RequestMapping(value = "testv2")
-	public String testv2(int count) throws InterruptedException
+	public String testv2(int count, int sleep) throws InterruptedException
 	{
 		JSONObject jsonObject = new JSONObject();
 
 		for (int i = 0; i < count; i++)
 		{
-			jsonObject.put("res-key", new Random().nextInt(100) % 2);
+			jsonObject.put("key", new Random().nextInt(100) % 2);
 			Calendar calendar = Calendar.getInstance();
-			jsonObject.put("res-time", new Timestamp(calendar.getTimeInMillis()).toString());
+			jsonObject.put("time", new Timestamp(calendar.getTimeInMillis()).toString());
 			log.info(jsonObject.toJSONString());
 			ELKLog.log(jsonObject, "test-random", "", new Timestamp(System.currentTimeMillis()));
 			//			log.info("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
 			//			System.out.println("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
-			Thread.sleep(500);
+			if (sleep > 0)
+			{
+				Thread.sleep(sleep);
+			}
 		}
 		return "done on " + count;
 	}
