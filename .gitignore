@@ -14,3 +14,14 @@ logs
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+/bin/
+.classpath
+.project
+**.prefs
+.settings/
+.idea/
+**.iml
+.DS_Store
+
+**/*.log
+logs

@@ -1,20 +1,47 @@
 package com.leon.passwd.action;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.alibaba.fastjson.JSONObject;
+import com.leon.passwd.util.ELKLog;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.leon.passwd.schedule.GrabLeon;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Random;
 
-public class AccountAction extends AbstractAction
+@Slf4j
+@RestController
+public class AccountAction
 {
 	private static final long serialVersionUID = 5601982197489875967L;
-	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
+
+	@RequestMapping(value = "testv2")
+	public String testv2(int count, int sleep) throws InterruptedException
+	{
+		JSONObject jsonObject = new JSONObject();
+
+		for (int i = 0; i < count; i++)
+		{
+			jsonObject.put("key", new Random().nextInt(100) % 2);
+			Calendar calendar = Calendar.getInstance();
+			jsonObject.put("time", new Timestamp(calendar.getTimeInMillis()).toString());
+			log.info(jsonObject.toJSONString());
+			ELKLog.log(jsonObject, "test-random", "", new Timestamp(System.currentTimeMillis()));
+			//			log.info("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
+			//			System.out.println("testv2 " + new Timestamp(calendar.getTimeInMillis()).toString());
+			if (sleep > 0)
+			{
+				Thread.sleep(sleep);
+			}
+		}
+		return "done on " + count;
+	}
 
 	@Action(value = "testv2")
 	public void testv2()
 	{
-		logger.info("testV2 start");
-		new GrabLeon().start();
+		logger.info("testv2 " + new Date());
+		System.out.println("testv2 " + new Date());
 	}
 }
