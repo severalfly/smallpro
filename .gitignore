@@ -21,3 +21,4 @@ buildNumber.properties
 
 **/*.log
 logs
+**/*.class

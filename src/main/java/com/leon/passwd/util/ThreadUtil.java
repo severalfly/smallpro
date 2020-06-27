@@ -1,13 +1,15 @@
 package com.leon.passwd.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 
-@Slf4j
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ThreadUtil
 {
+	private static Logger log = LoggerFactory.getLogger(ThreadUtil.class);
+
 	/**
 	 * 将任务放入线程池，阻塞型
 	 * @param executor 线程池

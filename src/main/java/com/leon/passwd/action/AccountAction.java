@@ -3,7 +3,9 @@ package com.leon.passwd.action;
 import com.alibaba.fastjson.JSONObject;
 import com.leon.passwd.util.ELKLog;
 import com.leon.passwd.util.ThreadUtil;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,10 +16,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-@Slf4j
 @RestController
 public class AccountAction
 {
+	private static Logger log = LoggerFactory.getLogger(AccountAction.class);
 	private ThreadPoolExecutor threadexecutor = new ThreadPoolExecutor(10, 300, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100));
 
 	private static final long serialVersionUID = 5601982197489875967L;
