@@ -3,6 +3,9 @@ package com.leon.passwd.jvm.ch2;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @Package com.leon.passwd.jvm.ch2
  * @author zhangyunfei
@@ -11,6 +14,8 @@ import java.util.List;
  */
 public class HeapOOM
 {
+	private static Logger log = LoggerFactory.getLogger(HeapOOM.class);
+
 	static class OOMObject
 	{
 	}
@@ -25,6 +30,7 @@ public class HeapOOM
 		List<OOMObject> list = new ArrayList<>();
 		while (true)
 		{
+			log.info("aaaa");
 			list.add(new OOMObject());
 		}
 	}
