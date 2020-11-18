@@ -17,6 +17,7 @@ buildNumber.properties
 .settings/
 .idea/
 **.iml
+**.class
 .DS_Store
 
 **/*.log
