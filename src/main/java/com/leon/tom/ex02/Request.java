@@ -7,10 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletRequest;
-
+import javax.servlet.*;
 
 public class Request implements ServletRequest {
 
@@ -68,7 +65,73 @@ public class Request implements ServletRequest {
     return null;
   }
 
-  public RequestDispatcher getRequestDispatcher(String path) {
+	@Override
+	public int getRemotePort()
+	{
+		return 0;
+	}
+
+	@Override
+	public String getLocalName()
+	{
+		return null;
+	}
+
+	@Override
+	public String getLocalAddr()
+	{
+		return null;
+	}
+
+	@Override
+	public int getLocalPort()
+	{
+		return 0;
+	}
+
+	@Override
+	public ServletContext getServletContext()
+	{
+		return null;
+	}
+
+	@Override
+	public AsyncContext startAsync() throws IllegalStateException
+	{
+		return null;
+	}
+
+	@Override
+	public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException
+	{
+		return null;
+	}
+
+	@Override
+	public boolean isAsyncStarted()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isAsyncSupported()
+	{
+		return false;
+	}
+
+	@Override
+	public AsyncContext getAsyncContext()
+	{
+		return null;
+	}
+
+	@Override
+	public DispatcherType getDispatcherType()
+	{
+		return null;
+	}
+
+	public RequestDispatcher getRequestDispatcher(String path) {
     return null;
   }
 
@@ -84,7 +147,13 @@ public class Request implements ServletRequest {
     return 0;
   }
 
-  public String getContentType() {
+	@Override
+	public long getContentLengthLong()
+	{
+		return 0;
+	}
+
+	public String getContentType() {
     return null;
   }
 

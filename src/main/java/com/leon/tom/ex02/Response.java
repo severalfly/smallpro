@@ -73,7 +73,13 @@ public class Response implements ServletResponse {
     return null;
   }
 
-  public Locale getLocale() {
+	@Override
+	public String getContentType()
+	{
+		return null;
+	}
+
+	public Locale getLocale() {
     return null;
   }
 
@@ -88,7 +94,13 @@ public class Response implements ServletResponse {
     return writer;
   }
 
-  public boolean isCommitted() {
+	@Override
+	public void setCharacterEncoding(String charset)
+	{
+
+	}
+
+	public boolean isCommitted() {
     return false;
   }
 
@@ -104,7 +116,13 @@ public class Response implements ServletResponse {
   public void setContentLength(int length) {
   }
 
-  public void setContentType(String type) {
+	@Override
+	public void setContentLengthLong(long length)
+	{
+
+	}
+
+	public void setContentType(String type) {
   }
 
   public void setLocale(Locale locale) {
